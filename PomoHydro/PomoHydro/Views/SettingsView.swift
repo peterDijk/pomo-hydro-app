@@ -72,11 +72,12 @@ private struct PomodoroSettingsTab: View {
     @AppStorage("sessionsBeforeLongBreak") private var sessionsBeforeLongBreak: Int = 4
     @AppStorage("autoStartBreak") private var autoStartBreak: Bool = true
     @AppStorage("autoStartWork") private var autoStartWork: Bool = true
+    @AppStorage("eyeStrainInterval") private var eyeStrainInterval: Int = 20
     @Environment(PomodoroService.self) private var pomodoroService
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            sliderRow(label: "Work Duration", value: $workDuration, range: 5...60, format: "%d min")
+            sliderRow(label: "Work Duration", value: $workDuration, range: 1...60, format: "%d min")
                 .onChange(of: workDuration) { oldValue, newValue in
                     if pomodoroService.state == .working {
                         pomodoroService.recalculateEndDate(oldDuration: oldValue, newDuration: newValue)
@@ -88,13 +89,14 @@ private struct PomodoroSettingsTab: View {
                         pomodoroService.recalculateEndDate(oldDuration: oldValue, newDuration: newValue)
                     }
                 }
-            sliderRow(label: "Long Break", value: $longBreakDuration, range: 5...30, format: "%d min")
+            sliderRow(label: "Long Break", value: $longBreakDuration, range: 1...30, format: "%d min")
                 .onChange(of: longBreakDuration) { oldValue, newValue in
                     if pomodoroService.state == .longBreak {
                         pomodoroService.recalculateEndDate(oldDuration: oldValue, newDuration: newValue)
                     }
                 }
             sliderRow(label: "Sessions Before Long Break", value: $sessionsBeforeLongBreak, range: 2...8, format: "%d")
+            sliderRow(label: "Eye-Strain Reminder", value: $eyeStrainInterval, range: 1...30, format: "%d min")
 
             Divider()
                 .padding(.vertical, 4)
@@ -111,6 +113,7 @@ private struct PomodoroSettingsTab: View {
                     shortBreakDuration = 5
                     longBreakDuration = 15
                     sessionsBeforeLongBreak = 4
+                    eyeStrainInterval = 20
                     autoStartBreak = true
                     autoStartWork = true
                 }
@@ -130,7 +133,7 @@ private struct HydrationSettingsTab: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            sliderRow(label: "Reminder Interval", value: $reminderInterval, range: 15...120, format: "%d min")
+            sliderRow(label: "Reminder Interval", value: $reminderInterval, range: 1...120, format: "%d min")
                 .onChange(of: reminderInterval) { _, _ in
                     hydrationService.restartWithNewInterval()
                 }

@@ -35,6 +35,7 @@ final class PomodoroService {
     @ObservationIgnored @AppStorage("autoStartBreak") var autoStartBreak: Bool = true
     @ObservationIgnored @AppStorage("autoStartWork") var autoStartWork: Bool = true
     @ObservationIgnored @AppStorage("allPaused") var allPaused: Bool = false
+    @ObservationIgnored @AppStorage("eyeStrainInterval") var eyeStrainInterval: Int = 20
 
     // MARK: - Crash Recovery Persistence (CROSS-05)
     @ObservationIgnored @AppStorage("savedEndTime") private var savedEndTimeInterval: Double = 0
@@ -373,8 +374,8 @@ final class PomodoroService {
     private func startEyeStrainTimer() {
         eyeStrainTimer?.invalidate()
         eyeStrainSuppressed = false
-        // Fire every 20 minutes during work
-        eyeStrainTimer = Timer.scheduledTimer(withTimeInterval: 20 * 60, repeats: true) { [weak self] _ in
+        // Fire at configured interval during work
+        eyeStrainTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(eyeStrainInterval * 60), repeats: true) { [weak self] _ in
             Task { @MainActor in
                 await self?.handleEyeStrainTick()
             }
