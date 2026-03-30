@@ -23,6 +23,17 @@ struct MenuBarView: View {
                 PlaceholderContentView()
             default:
                 PlaceholderContentView()
+                // TODO: Remove after Phase 1 verification
+                Button("Send Test Notification") {
+                    Task {
+                        await notificationService.sendTestNotification()
+                    }
+                }
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .buttonStyle(.borderless)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
             }
 
             Divider()
@@ -36,6 +47,7 @@ struct MenuBarView: View {
                         .font(.callout)
                 }
                 .buttonStyle(.borderless)
+                .accessibilityLabel("Open settings")
 
                 Spacer()
 
@@ -45,6 +57,7 @@ struct MenuBarView: View {
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .buttonStyle(.borderless)
+                .accessibilityLabel("Quit PomoHydro")
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
