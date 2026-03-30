@@ -1,7 +1,8 @@
 ---
 phase: 1
 slug: app-shell-notifications
-status: draft
+status: approved
+reviewed_at: 2026-03-30
 shadcn_initialized: false
 preset: not applicable (native macOS)
 created: 2026-03-30
@@ -252,7 +253,7 @@ MenuBarExtra("PomoHydro", systemImage: "timer") {
 | Text line 1 | "Notifications are off." — `.callout`, `.primary` weight `.semibold` |
 | Text line 2 | "Enable in System Settings" — `.callout`, `.accentColor`, tappable |
 | Layout | HStack: icon (leading) + VStack of text lines | 
-| Internal padding | 12pt horizontal, 10pt vertical |
+| Internal padding | 12pt horizontal, 8pt vertical |
 | External margin | 16pt from popover edges (md), 8pt below banner (sm) |
 | Persistence | Always visible when status is `.denied` — non-dismissable |
 
@@ -325,11 +326,11 @@ Service:
 
 ## Checker Sign-Off
 
-- [ ] Dimension 1 Copywriting: PASS
-- [ ] Dimension 2 Visuals: PASS
-- [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
-- [ ] Dimension 5 Spacing: PASS
-- [ ] Dimension 6 Registry Safety: PASS
+- [x] Dimension 1 Copywriting: PASS
+- [x] Dimension 2 Visuals: PASS
+- [x] Dimension 3 Color: PASS
+- [x] Dimension 4 Typography: PASS
+- [x] Dimension 5 Spacing: PASS
+- [x] Dimension 6 Registry Safety: PASS
 
-**Approval:** pending
+**Approval:** approved 2026-03-30
