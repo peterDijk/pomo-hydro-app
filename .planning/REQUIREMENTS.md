@@ -28,7 +28,7 @@
 ### Menu Bar UX
 
 - [x] **UX-01**: App lives in the macOS menu bar with no Dock icon (LSUIElement)
-- [ ] **UX-02**: Menu bar icon reflects live state (idle, working, on break)
+- [x] **UX-02**: Menu bar icon reflects live state (idle, working, on break)
 - [ ] **UX-03**: Dropdown shows active timer countdown and current water count
 - [ ] **UX-04**: User can pause all reminders temporarily from the dropdown
 - [x] **UX-05**: App respects macOS Do Not Disturb (handled automatically by UNUserNotificationCenter)
@@ -87,7 +87,7 @@
 | EYE-01 | Phase 2 | Complete |
 | EYE-02 | Phase 2 | Complete |
 | EYE-03 | Phase 2 | Complete |
-| UX-02 | Phase 2 | Pending |
+| UX-02 | Phase 2 | Complete |
 | CROSS-04 | Phase 2 | Complete |
 | CROSS-05 | Phase 2 | Complete |
 | HYDR-01 | Phase 3 | Pending |
