@@ -17,6 +17,9 @@ struct PomoHydroApp: App {
             MenuBarView()
                 .environment(notificationService)
                 .environment(pomodoroService)
+                .task {
+                    pomodoroService.setNotificationService(notificationService)
+                }
         } label: {
             Label("PomoHydro", systemImage: "timer")
         }

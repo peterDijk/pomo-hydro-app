@@ -42,12 +42,23 @@ final class PomodoroService {
     @ObservationIgnored @AppStorage("savedSessionsCompleted") private var savedSessionsCompleted: Int = 0
     @ObservationIgnored @AppStorage("savedSessionsDate") private var savedSessionsDateString: String = ""
 
+    // MARK: - Notification Service Dependency
+    private var notificationService: NotificationService?
+
+    func setNotificationService(_ service: NotificationService) {
+        self.notificationService = service
+    }
+
     // MARK: - Internal Timer State
     private var endDate: Date?
     private var displayTimer: Timer?
     private var autoStartTimer: Timer?
     private var activityToken: NSObjectProtocol?
     private var pendingAutoStartState: PomodoroState?
+
+    // MARK: - Eye-Strain Sub-Timer (EYE-01, EYE-02)
+    private var eyeStrainTimer: Timer?
+    private var eyeStrainSuppressed: Bool = false
 
     // MARK: - Computed Properties
 
@@ -118,6 +129,7 @@ final class PomodoroService {
         secondsRemaining = totalSeconds
         endDate = Date().addingTimeInterval(TimeInterval(totalSeconds))
         beginAppNapPrevention()
+        startEyeStrainTimer()
         persistState()
         startDisplayTimer()
     }
@@ -129,11 +141,13 @@ final class PomodoroService {
         displayTimer = nil
         secondsRemaining = remaining
         self.endDate = nil
+        stopEyeStrainTimer()
         persistState()
     }
 
     func resume() {
         endDate = Date().addingTimeInterval(TimeInterval(secondsRemaining))
+        startEyeStrainTimer()
         persistState()
         startDisplayTimer()
     }
@@ -144,6 +158,7 @@ final class PomodoroService {
         autoStartTimer?.invalidate()
         autoStartTimer = nil
         pendingAutoStartState = nil
+        stopEyeStrainTimer()
         state = .idle
         secondsRemaining = 0
         totalSeconds = 0
@@ -202,6 +217,12 @@ final class PomodoroService {
         case .working:
             sessionsCompleted += 1
 
+            // Send work complete notification — fold eye-strain if suppressed (EYE-02)
+            Task {
+                await notificationService?.sendWorkCompleteNotification(includeEyeStrain: eyeStrainSuppressed)
+            }
+            stopEyeStrainTimer()
+
             let nextBreakState: PomodoroState =
                 (sessionsCompleted % sessionsBeforeLongBreak == 0)
                 ? .longBreak : .shortBreak
@@ -215,6 +236,12 @@ final class PomodoroService {
             }
 
         case .shortBreak, .longBreak:
+            // Send break complete notification
+            let isLong = state == .longBreak
+            Task {
+                await notificationService?.sendBreakCompleteNotification(isLongBreak: isLong)
+            }
+
             if autoStartWork {
                 startAutoStartCountdown(nextState: .working)
             } else {
@@ -264,6 +291,7 @@ final class PomodoroService {
             secondsRemaining = totalSeconds
             endDate = Date().addingTimeInterval(TimeInterval(totalSeconds))
             beginAppNapPrevention()
+            startEyeStrainTimer()
             persistState()
             startDisplayTimer()
 
@@ -286,6 +314,36 @@ final class PomodoroService {
         default:
             break
         }
+    }
+
+    // MARK: - Eye-Strain Sub-Timer (20-20-20 Rule)
+
+    private func startEyeStrainTimer() {
+        eyeStrainTimer?.invalidate()
+        eyeStrainSuppressed = false
+        // Fire every 20 minutes during work
+        eyeStrainTimer = Timer.scheduledTimer(withTimeInterval: 20 * 60, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                await self?.handleEyeStrainTick()
+            }
+        }
+    }
+
+    private func stopEyeStrainTimer() {
+        eyeStrainTimer?.invalidate()
+        eyeStrainTimer = nil
+    }
+
+    private func handleEyeStrainTick() async {
+        // D-04: If break is starting within 3 minutes, suppress and fold into break notification
+        guard state == .working, let endDate else { return }
+        let timeUntilBreak = endDate.timeIntervalSinceNow
+        if timeUntilBreak <= 180 {
+            eyeStrainSuppressed = true
+            return
+        }
+        // Fire standalone eye-strain notification (EYE-01)
+        await notificationService?.sendEyeStrainNotification()
     }
 
     // MARK: - App Nap Prevention (CROSS-04)
