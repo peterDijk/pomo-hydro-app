@@ -9,6 +9,7 @@
 ### Xcode Project Setup
 
 Create via Xcode: File → New → Project → macOS → App. Settings:
+
 - Interface: SwiftUI
 - Language: Swift
 - Storage: None (UserDefaults, not SwiftData)
@@ -16,6 +17,7 @@ Create via Xcode: File → New → Project → macOS → App. Settings:
 - Deployment target: macOS 14.0
 
 Post-creation:
+
 - Set `LSUIElement = true` in Info.plist (or target's custom macOS Application Target Properties)
 - Enable Swift 6 strict concurrency: Build Settings → Swift Compiler → Strict Concurrency Checking → Complete
 - Set SWIFT_VERSION to 6 in build settings
@@ -40,6 +42,7 @@ struct PomoHydroApp: App {
 ```
 
 Key API facts (verified via Context7):
+
 - `MenuBarExtra` is a `Scene` type, available macOS 13.0+
 - `.menuBarExtraStyle(.window)` returns `WindowMenuBarExtraStyle` — renders as popover-like window
 - Label uses `systemImage:` for SF Symbol icon
@@ -73,6 +76,7 @@ try await center.add(request)
 ### NotificationService Design
 
 `@Observable` class that wraps UNUserNotificationCenter:
+
 - Tracks `authorizationStatus` as a published property
 - `requestPermission()` async method — calls `requestAuthorization(options: [.alert, .sound])`
 - `checkStatus()` async method — calls `notificationSettings()`, updates status
