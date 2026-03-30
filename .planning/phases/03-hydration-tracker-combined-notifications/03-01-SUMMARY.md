@@ -2,7 +2,15 @@
 phase: 03-hydration-tracker-combined-notifications
 plan: 01
 subsystem: services
-tags: [swift, observable, hydration, notifications, appstorage, actionable-notifications]
+tags:
+  [
+    swift,
+    observable,
+    hydration,
+    notifications,
+    appstorage,
+    actionable-notifications,
+  ]
 
 requires:
   - phase: 02-pomodoro-timer-eye-strain
@@ -41,8 +49,7 @@ patterns-established:
   - "UNNotificationAction + UNNotificationCategory for actionable notification buttons"
   - "NSObject + UNUserNotificationCenterDelegate for handling notification responses in SwiftUI"
 
-requirements-completed:
-  [HYDR-01, HYDR-02, HYDR-03, HYDR-04, HYDR-05, CROSS-02]
+requirements-completed: [HYDR-01, HYDR-02, HYDR-03, HYDR-04, HYDR-05, CROSS-02]
 
 duration: 3min
 completed: 2026-03-30

@@ -6,6 +6,7 @@
 ## Standard Stack
 
 No new dependencies. Phase 3 uses exclusively:
+
 - Swift + SwiftUI (same as Phase 1-2)
 - UserNotifications framework (already imported)
 - `@Observable` + `@MainActor` service pattern (established in Phase 2)
@@ -57,6 +58,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter,
 ### 2. Hydration Timer Architecture
 
 Follows PomodoroService deadline-based pattern exactly:
+
 - Store `hydrationEndDate` for next reminder
 - `Timer.publish` or `Timer.scheduledTimer` for countdown display
 - `@AppStorage` for persistence of glass count, goal, interval, last reminder date
@@ -77,6 +79,7 @@ The combined notification logic lives in NotificationService — a new method `s
 ### 4. Midnight Reset for Glass Count (CROSS-02)
 
 Same pattern as PomodoroService session count reset:
+
 - Store date string in `@AppStorage("glassesDate")`
 - On each tick / each access, compare to today string
 - If different day, reset `glassesConsumed` to 0
@@ -87,13 +90,13 @@ MenuBarView already shows PomodoroView. Add HydrationView below with Divider sep
 
 ## Architecture Patterns
 
-| Component | Pattern | Follows |
-|-----------|---------|---------|
-| HydrationService | `@Observable @MainActor` + `@AppStorage` | PomodoroService |
-| HydrationView | `@Environment(HydrationService.self)` | PomodoroView |
+| Component           | Pattern                                       | Follows         |
+| ------------------- | --------------------------------------------- | --------------- |
+| HydrationService    | `@Observable @MainActor` + `@AppStorage`      | PomodoroService |
+| HydrationView       | `@Environment(HydrationService.self)`         | PomodoroView    |
 | Notification wiring | `setNotificationService()` + `.task` modifier | Phase 2 pattern |
-| Timer | Deadline-based Date math | PomodoroService |
-| Persistence | `@ObservationIgnored @AppStorage` | PomodoroService |
+| Timer               | Deadline-based Date math                      | PomodoroService |
+| Persistence         | `@ObservationIgnored @AppStorage`             | PomodoroService |
 
 ## Don't Hand-Roll
 
@@ -114,5 +117,6 @@ MenuBarView already shows PomodoroView. Add HydrationView below with Divider sep
 - **Medium risk:** Notification action delegate handling in SwiftUI MenuBarExtra — less common pattern, but well-documented
 
 ---
-*Phase: 03-hydration-tracker-combined-notifications*
-*Research completed: 2026-03-30*
+
+_Phase: 03-hydration-tracker-combined-notifications_
+_Research completed: 2026-03-30_

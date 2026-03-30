@@ -33,15 +33,16 @@ No changes from Phase 1/2.
 
 Unchanged from Phase 1/2. All tokens carry forward.
 
-| Token | Value | Usage                                                          |
-| ----- | ----- | -------------------------------------------------------------- |
-| xs    | 4pt   | Inline label gaps                                              |
-| sm    | 8pt   | Compact element spacing                                        |
-| md    | 16pt  | Default content padding, popover edge insets                   |
-| lg    | 24pt  | Section vertical spacing                                       |
-| xl    | 32pt  | Major section breaks                                           |
+| Token | Value | Usage                                        |
+| ----- | ----- | -------------------------------------------- |
+| xs    | 4pt   | Inline label gaps                            |
+| sm    | 8pt   | Compact element spacing                      |
+| md    | 16pt  | Default content padding, popover edge insets |
+| lg    | 24pt  | Section vertical spacing                     |
+| xl    | 32pt  | Major section breaks                         |
 
 New exceptions:
+
 - Hydration section uses `VStack(spacing: 8)` internally (sm) matching PomodoroView pattern
 - Divider between Pomodoro and Hydration sections has 0pt extra padding (Divider provides its own 8pt visual space)
 - Progress bar height: 8pt
@@ -53,14 +54,14 @@ New exceptions:
 
 Extends Phase 2. No new text styles — new elements map to existing roles.
 
-| Role                     | SwiftUI Modifier                  | Weight     | Usage                                                |
-| ------------------------ | --------------------------------- | ---------- | ---------------------------------------------------- |
-| Section label            | `.font(.caption)`                 | `.regular` | "Hydration" section header                           |
-| Glass count              | `.font(.title3)`                  | `.semibold` | "4 / 8" main count display                          |
-| Unit label               | `.font(.footnote)`                | `.regular` | "glasses · 1,000 mL" below count                    |
-| Progress label           | `.font(.caption)`                 | `.regular` | "50%" overlay or beside progress bar                 |
-| Size option label        | `.font(.caption)`                 | `.regular` | "S" / "M" / "L" in segmented control                |
-| Button label             | `.font(.body)`                    | `.regular` | "Log Glass" button text                              |
+| Role              | SwiftUI Modifier   | Weight      | Usage                                |
+| ----------------- | ------------------ | ----------- | ------------------------------------ |
+| Section label     | `.font(.caption)`  | `.regular`  | "Hydration" section header           |
+| Glass count       | `.font(.title3)`   | `.semibold` | "4 / 8" main count display           |
+| Unit label        | `.font(.footnote)` | `.regular`  | "glasses · 1,000 mL" below count     |
+| Progress label    | `.font(.caption)`  | `.regular`  | "50%" overlay or beside progress bar |
+| Size option label | `.font(.caption)`  | `.regular`  | "S" / "M" / "L" in segmented control |
+| Button label      | `.font(.body)`     | `.regular`  | "Log Glass" button text              |
 
 ---
 
@@ -68,16 +69,16 @@ Extends Phase 2. No new text styles — new elements map to existing roles.
 
 Extends Phase 2 semantic colors. One new role added for hydration.
 
-| Role                    | SwiftUI Color                | Usage                                  |
-| ----------------------- | ---------------------------- | -------------------------------------- |
-| Dominant background     | System default (automatic)   | Popover background                     |
-| Work ring stroke        | `.blue` (`Color.blue`)       | Unchanged from Phase 2                 |
-| Break ring stroke       | `.green` (`Color.green`)     | Unchanged from Phase 2                 |
-| **Hydration accent**    | `.cyan` (`Color.cyan`)       | Progress bar fill, "Log Glass" icon    |
-| Hydration track         | `.secondary.opacity(0.2)`    | Empty progress bar background          |
-| Primary text            | `.primary`                   | Glass count number                     |
-| Secondary text          | `.secondary`                 | Section label, unit label, goal label  |
-| Accent controls         | `.accentColor` (system blue) | Buttons remain system blue             |
+| Role                 | SwiftUI Color                | Usage                                 |
+| -------------------- | ---------------------------- | ------------------------------------- |
+| Dominant background  | System default (automatic)   | Popover background                    |
+| Work ring stroke     | `.blue` (`Color.blue`)       | Unchanged from Phase 2                |
+| Break ring stroke    | `.green` (`Color.green`)     | Unchanged from Phase 2                |
+| **Hydration accent** | `.cyan` (`Color.cyan`)       | Progress bar fill, "Log Glass" icon   |
+| Hydration track      | `.secondary.opacity(0.2)`    | Empty progress bar background         |
+| Primary text         | `.primary`                   | Glass count number                    |
+| Secondary text       | `.secondary`                 | Section label, unit label, goal label |
+| Accent controls      | `.accentColor` (system blue) | Buttons remain system blue            |
 
 **Why `.cyan`:** Visually distinct from Pomodoro blue (`.blue`) and break green (`.green`). Water association. High contrast in both light and dark mode. Does NOT conflict with accent color (system blue used for interactive controls).
 
@@ -87,23 +88,23 @@ Accent reserved for: Same as Phase 2 — buttons only. Cyan is decorative (progr
 
 ## Copywriting Contract
 
-| Element                                        | Copy                                                                   |
-| ---------------------------------------------- | ---------------------------------------------------------------------- |
-| **Section label**                              | "Hydration"                                                            |
-| **Glass count display**                        | "{N} / {goal}" (e.g., "4 / 8")                                        |
-| **Unit label**                                 | "glasses · {N} mL" (e.g., "glasses · 1,000 mL")                       |
-| **Log Glass button**                           | "Log Glass" with SF Symbol `drop.fill`                                 |
-| **Size option: small**                         | "S" with subtitle "150 mL"                                             |
-| **Size option: medium (default)**              | "M" with subtitle "250 mL"                                             |
-| **Size option: large**                         | "L" with subtitle "500 mL"                                             |
-| **Progress complete**                          | "Goal reached!" (replaces percentage when 100%)                        |
-| **Hydration notification title**               | "Time to Hydrate"                                                      |
-| **Hydration notification body**                | "Take a moment to drink some water."                                   |
-| **Hydration notification action**              | "Log Glass" (UNNotificationAction title)                               |
-| **Combined break + hydration notif title**     | "Break Time — Hydrate!"                                                |
-| **Combined break + hydration notif body**      | "Rest your eyes, stretch, and drink some water."                       |
-| **Combined + eye-strain notif body**           | "Look away for 20 seconds, stretch, and drink some water."             |
-| **Midnight reset** (no UI — silent)            | N/A — count resets to 0 silently at midnight                           |
+| Element                                    | Copy                                                       |
+| ------------------------------------------ | ---------------------------------------------------------- |
+| **Section label**                          | "Hydration"                                                |
+| **Glass count display**                    | "{N} / {goal}" (e.g., "4 / 8")                             |
+| **Unit label**                             | "glasses · {N} mL" (e.g., "glasses · 1,000 mL")            |
+| **Log Glass button**                       | "Log Glass" with SF Symbol `drop.fill`                     |
+| **Size option: small**                     | "S" with subtitle "150 mL"                                 |
+| **Size option: medium (default)**          | "M" with subtitle "250 mL"                                 |
+| **Size option: large**                     | "L" with subtitle "500 mL"                                 |
+| **Progress complete**                      | "Goal reached!" (replaces percentage when 100%)            |
+| **Hydration notification title**           | "Time to Hydrate"                                          |
+| **Hydration notification body**            | "Take a moment to drink some water."                       |
+| **Hydration notification action**          | "Log Glass" (UNNotificationAction title)                   |
+| **Combined break + hydration notif title** | "Break Time — Hydrate!"                                    |
+| **Combined break + hydration notif body**  | "Rest your eyes, stretch, and drink some water."           |
+| **Combined + eye-strain notif body**       | "Look away for 20 seconds, stretch, and drink some water." |
+| **Midnight reset** (no UI — silent)        | N/A — count resets to 0 silently at midnight               |
 
 Tone: Same as Phase 2 — encouraging, not nagging. "Time to Hydrate" not "YOU HAVEN'T DRUNK WATER."
 
@@ -203,15 +204,15 @@ When Pomodoro is idle, the PomodoroView shows just the "Start Focus" CTA. Hydrat
 
 ## Progress Bar Specification
 
-| Property           | Value                                              |
-| ------------------ | -------------------------------------------------- |
-| Height             | 8pt                                                |
-| Corner radius      | 4pt (both track and fill)                          |
-| Track color        | `.secondary.opacity(0.2)`                          |
-| Fill color         | `.cyan`                                            |
-| Fill width         | `geometry.size.width * (glassesConsumed / goal)`   |
-| Animation          | `.easeInOut(duration: 0.3)` on fill width change   |
-| Clip               | `.clipShape(RoundedRectangle(cornerRadius: 4))`    |
+| Property      | Value                                            |
+| ------------- | ------------------------------------------------ |
+| Height        | 8pt                                              |
+| Corner radius | 4pt (both track and fill)                        |
+| Track color   | `.secondary.opacity(0.2)`                        |
+| Fill color    | `.cyan`                                          |
+| Fill width    | `geometry.size.width * (glassesConsumed / goal)` |
+| Animation     | `.easeInOut(duration: 0.3)` on fill width change |
+| Clip          | `.clipShape(RoundedRectangle(cornerRadius: 4))`  |
 
 Implementation: `GeometryReader` wrapping two `RoundedRectangle` layers (track behind, fill in front). NOT `ProgressView` (cannot customize color reliably on macOS).
 
@@ -221,29 +222,29 @@ Implementation: `GeometryReader` wrapping two `RoundedRectangle` layers (track b
 
 ### Standalone Hydration Reminder
 
-| Property           | Value                                               |
-| ------------------ | --------------------------------------------------- |
-| Identifier         | `"hydration-reminder"`                              |
-| Category           | `"HYDRATION_REMINDER"`                              |
-| Title              | "Time to Hydrate"                                   |
-| Body               | "Take a moment to drink some water."                |
-| Sound              | `.default`                                          |
-| Action             | "Log Glass" (identifier: `"LOG_GLASS"`)             |
-| Action option      | `.foreground`                                        |
+| Property      | Value                                   |
+| ------------- | --------------------------------------- |
+| Identifier    | `"hydration-reminder"`                  |
+| Category      | `"HYDRATION_REMINDER"`                  |
+| Title         | "Time to Hydrate"                       |
+| Body          | "Take a moment to drink some water."    |
+| Sound         | `.default`                              |
+| Action        | "Log Glass" (identifier: `"LOG_GLASS"`) |
+| Action option | `.foreground`                           |
 
 ### Combined Break + Hydration Notification
 
 Sent when Pomodoro break starts AND hydration is due (within ±5 min merge window per D-06).
 
-| Property           | Value                                                           |
-| ------------------ | --------------------------------------------------------------- |
-| Identifier         | `"break-combined"`                                              |
-| Title              | "Break Time — Hydrate!"                                         |
-| Body (no eye-strain) | "Rest your eyes, stretch, and drink some water."              |
-| Body (with eye-strain) | "Look away for 20 seconds, stretch, and drink some water."  |
-| Sound              | `.default`                                                       |
-| Action             | "Log Glass" (identifier: `"LOG_GLASS"`)                         |
-| Category           | `"HYDRATION_REMINDER"` (same category, same action)             |
+| Property               | Value                                                      |
+| ---------------------- | ---------------------------------------------------------- |
+| Identifier             | `"break-combined"`                                         |
+| Title                  | "Break Time — Hydrate!"                                    |
+| Body (no eye-strain)   | "Rest your eyes, stretch, and drink some water."           |
+| Body (with eye-strain) | "Look away for 20 seconds, stretch, and drink some water." |
+| Sound                  | `.default`                                                 |
+| Action                 | "Log Glass" (identifier: `"LOG_GLASS"`)                    |
+| Category               | `"HYDRATION_REMINDER"` (same category, same action)        |
 
 ### Notification Action Registration
 
@@ -272,35 +273,35 @@ NotificationService must conform to `UNUserNotificationCenterDelegate` and handl
 
 ## Interaction Patterns
 
-| Interaction                     | Behavior                                                                     |
-| ------------------------------- | ---------------------------------------------------------------------------- |
-| Tap "Log Glass"                 | Increment glass count by selected size (default 250mL), animate progress bar |
-| Tap size option (S/M/L)        | Change selected size for next Log Glass tap. Visual selection indicator.      |
-| Progress bar reaches 100%      | "50%" text changes to "Goal reached!" in `.cyan` color                       |
-| Hydration notification arrives  | Standard macOS notification with "Log Glass" action button                    |
-| Tap "Log Glass" on notification | App foregrounds (if needed), glass logged at default 250mL size              |
-| Midnight reset                  | Glass count silently resets to 0, progress bar empties                        |
-| Pomodoro break starts (within merge window) | Combined notification sent instead of separate break + hydration |
+| Interaction                                 | Behavior                                                                     |
+| ------------------------------------------- | ---------------------------------------------------------------------------- |
+| Tap "Log Glass"                             | Increment glass count by selected size (default 250mL), animate progress bar |
+| Tap size option (S/M/L)                     | Change selected size for next Log Glass tap. Visual selection indicator.     |
+| Progress bar reaches 100%                   | "50%" text changes to "Goal reached!" in `.cyan` color                       |
+| Hydration notification arrives              | Standard macOS notification with "Log Glass" action button                   |
+| Tap "Log Glass" on notification             | App foregrounds (if needed), glass logged at default 250mL size              |
+| Midnight reset                              | Glass count silently resets to 0, progress bar empties                       |
+| Pomodoro break starts (within merge window) | Combined notification sent instead of separate break + hydration             |
 
 ---
 
 ## Accessibility
 
-| Element                | Label                                                    | Trait                     |
-| ---------------------- | -------------------------------------------------------- | ------------------------- |
-| Glass count            | "{N} of {goal} glasses consumed, {mL} milliliters"      | `.updatesFrequently`      |
-| Progress bar           | "Hydration progress: {percent} percent"                   | `.updatesFrequently`      |
-| Log Glass button       | "Log glass of water, {size} milliliters"                 | button                    |
-| Size picker            | "Glass size: Small 150 mL, Medium 250 mL, Large 500 mL" | picker                    |
+| Element          | Label                                                   | Trait                |
+| ---------------- | ------------------------------------------------------- | -------------------- |
+| Glass count      | "{N} of {goal} glasses consumed, {mL} milliliters"      | `.updatesFrequently` |
+| Progress bar     | "Hydration progress: {percent} percent"                 | `.updatesFrequently` |
+| Log Glass button | "Log glass of water, {size} milliliters"                | button               |
+| Size picker      | "Glass size: Small 150 mL, Medium 250 mL, Large 500 mL" | picker               |
 
 ---
 
 ## Registry Safety
 
-| Registry         | Blocks Used | Safety Gate    |
-| ---------------- | ----------- | -------------- |
-| SwiftUI built-in | All native  | Not required   |
-| SF Symbols       | `drop.fill` | Not required   |
+| Registry         | Blocks Used | Safety Gate  |
+| ---------------- | ----------- | ------------ |
+| SwiftUI built-in | All native  | Not required |
+| SF Symbols       | `drop.fill` | Not required |
 
 ---
 

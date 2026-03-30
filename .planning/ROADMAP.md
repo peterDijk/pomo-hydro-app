@@ -56,7 +56,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 02-01-PLAN.md — PomodoroService: state machine, timer, persistence, App Nap
 - [x] 02-02-PLAN.md — Eye-strain sub-timer + all timer notifications
 - [x] 02-03-PLAN.md — Timer ring UI, PomodoroView, menu bar icon
-   **UI hint**: yes
+      **UI hint**: yes
 
 ### Phase 3: Hydration Tracker & Combined Notifications
 
@@ -75,7 +75,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] 03-01-PLAN.md — HydrationService engine + NotificationService extensions + app wiring
 - [x] 03-02-PLAN.md — HydrationView UI, MenuBarView integration, combined notification logic
-   **UI hint**: yes
+      **UI hint**: yes
 
 ### Phase 4: Settings & Polish
 
@@ -95,9 +95,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Execution Order:**
 Phases execute in numeric order: 1 → 2 → 3 → 4
 
-| Phase                                         | Plans Complete | Status      | Completed |
-| --------------------------------------------- | -------------- | ----------- | --------- |
+| Phase                                         | Plans Complete | Status      | Completed  |
+| --------------------------------------------- | -------------- | ----------- | ---------- |
 | 1. App Shell & Notifications                  | 2/2            | Complete    | 2026-03-30 |
 | 2. Pomodoro Timer & Eye-Strain                | 3/3            | Complete    | 2026-03-30 |
-| 3. Hydration Tracker & Combined Notifications | 0/0            | Not started | -         |
-| 4. Settings & Polish                          | 0/0            | Not started | -         |
+| 3. Hydration Tracker & Combined Notifications | 0/0            | Not started | -          |
+| 4. Settings & Polish                          | 0/0            | Not started | -          |

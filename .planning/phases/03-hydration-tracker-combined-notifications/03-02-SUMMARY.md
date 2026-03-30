@@ -2,7 +2,8 @@
 phase: 03-hydration-tracker-combined-notifications
 plan: 02
 subsystem: ui
-tags: [swift, swiftui, hydration-ui, progress-bar, menu-bar, combined-notifications]
+tags:
+  [swift, swiftui, hydration-ui, progress-bar, menu-bar, combined-notifications]
 
 requires:
   - phase: 03-hydration-tracker-combined-notifications/01
