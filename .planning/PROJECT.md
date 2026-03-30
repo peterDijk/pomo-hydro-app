@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A native macOS menu bar app that bundles three health-focused timers into one lightweight companion: Pomodoro focus sessions with integrated 20-20-20 eye-strain reminders, and a hydration tracker that nudges you to drink water and counts your daily intake. Lives in the menu bar, notifies via native macOS notifications.
+A native macOS menu bar health companion that bundles Pomodoro focus sessions, 20-20-20 eye-strain reminders, and a hydration tracker into one lightweight app. Lives in the menu bar, notifies via native macOS alerts, and uses a custom clock+waterdrop icon as its brand mark.
 
 ## Core Value
 
@@ -12,19 +12,22 @@ Keep you healthy and focused during long work sessions — without getting in th
 
 ### Validated
 
-- [x] macOS native app (SwiftUI) — Validated in Phase 1: App Shell & Notifications
-- [x] Native macOS notifications for all reminders — Validated in Phase 1: App Shell & Notifications
-- [x] Pomodoro timer with configurable work/break durations — Validated in Phase 2: Pomodoro Timer & Eye-Strain
-- [x] 20-20-20 eye-strain reminders at 20-minute intervals during Pomodoro work blocks — Validated in Phase 2: Pomodoro Timer & Eye-Strain
-- [x] Combined break notification that mentions both rest and eye strain — Validated in Phase 2: Pomodoro Timer & Eye-Strain
-- [x] Menu bar icon with dropdown showing active timer countdown and water count — Validated in Phase 3: Hydration Tracker & Combined Notifications
-- [x] Hydration reminders at configurable intervals (default 45 min) — Validated in Phase 3: Hydration Tracker & Combined Notifications
-- [x] Log glasses of water with a single action — Validated in Phase 3: Hydration Tracker & Combined Notifications
-- [x] Track daily water count (glasses + derived mL) — Validated in Phase 3: Hydration Tracker & Combined Notifications
+- ✓ macOS native app (SwiftUI) — v1.0
+- ✓ Native macOS notifications for all reminders — v1.0
+- ✓ Pomodoro timer with configurable work/break durations — v1.0
+- ✓ 20-20-20 eye-strain reminders at 20-minute intervals during work blocks — v1.0
+- ✓ Combined break notification ("Rest. Look away. Drink water.") — v1.0
+- ✓ Menu bar icon with dropdown showing active timer countdown and water count — v1.0
+- ✓ Hydration reminders at configurable intervals (default 45 min) — v1.0
+- ✓ Log glasses of water with a single action (S/M/L sizes) — v1.0
+- ✓ Track daily water count (glasses + derived mL) — v1.0
+- ✓ Settings window with tabs (Pomodoro, Hydration, General) — v1.0
+- ✓ Global pause/resume all reminders from dropdown — v1.0
+- ✓ Mid-session timer recalculation when settings change — v1.0
 
 ### Active
 
-- [ ] Config button in dropdown that opens a settings modal
+(None — next milestone requirements TBD)
 
 ### Out of Scope
 
@@ -36,12 +39,10 @@ Keep you healthy and focused during long work sessions — without getting in th
 
 ## Context
 
-- Personal side project — just for the developer's own use initially
-- macOS-only, targeting current macOS versions
-- Menu bar app pattern — no dock icon, lives in the system tray
-- Three features share the screen real estate: the timers are coordinated so eye-strain reminders fold into the Pomodoro cycle naturally
-- Hydration runs on its own independent timer
-- Glass size assumed at ~250mL for deriving total mL from glass count
+Shipped v1.0 with 1,836 LOC Swift across 14 files.
+Tech stack: SwiftUI, AppKit (MenuBarExtra), UNUserNotificationCenter, @AppStorage/UserDefaults.
+All built in a single day using GSD workflow (4 phases, 9 plans).
+Post-v1.0 backlog items captured: hydration log-by-day, cloud collector, Slack integration, custom icon.
 
 ## Constraints
 
@@ -51,13 +52,17 @@ Keep you healthy and focused during long work sessions — without getting in th
 
 ## Key Decisions
 
-| Decision                                  | Rationale                                                          | Outcome   |
-| ----------------------------------------- | ------------------------------------------------------------------ | --------- |
-| Menu bar app (no dock icon)               | Minimal footprint, always accessible, non-intrusive                | — Pending |
-| Eye-strain folds into Pomodoro            | Avoids notification fatigue, natural pairing                       | — Pending |
-| Fixed hydration interval (45 min default) | Simple, adjustable, no complex adaptive logic                      | — Pending |
-| SwiftUI + native macOS                    | Best menu bar integration, native notifications, no Electron bloat | — Pending |
-| 250mL per glass assumption                | Standard glass size, simplifies tracking                           | — Pending |
+| Decision                                  | Rationale                                                          | Outcome      |
+| ----------------------------------------- | ------------------------------------------------------------------ | ------------ |
+| Menu bar app (no dock icon)               | Minimal footprint, always accessible, non-intrusive                | ✓ Good       |
+| Eye-strain folds into Pomodoro            | Avoids notification fatigue, natural pairing                       | ✓ Good       |
+| Fixed hydration interval (45 min default) | Simple, adjustable, no complex adaptive logic                      | ✓ Good       |
+| SwiftUI + native macOS                    | Best menu bar integration, native notifications, no Electron bloat | ✓ Good       |
+| 250mL per glass assumption                | Standard glass size, simplifies tracking                           | ✓ Good       |
+| Deadline-based timer (Date math)          | Accurate timing even with popover closed / App Nap                 | ✓ Good       |
+| Service wiring via set*Service() + .task  | Avoids init-order issues with @Observable                          | ✓ Good       |
+| Combined break notification (CROSS-01)    | Single "Rest. Look away. Drink." is the killer differentiator      | ✓ Good       |
+| @AppStorage for all persistence           | Simple, survives crashes, no CoreData overhead                     | ✓ Good       |
 
 ## Evolution
 
@@ -80,4 +85,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ---
 
-_Last updated: 2026-03-30 — Phase 3 (Hydration Tracker & Combined Notifications) complete. 3 of 4 phases done._
+_Last updated: 2026-03-30 after v1.0 milestone_
