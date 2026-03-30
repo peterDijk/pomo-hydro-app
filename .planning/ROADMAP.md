@@ -105,3 +105,14 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 2. Pomodoro Timer & Eye-Strain                | 3/3            | Complete    | 2026-03-30 |
 | 3. Hydration Tracker & Combined Notifications | 0/0            | Not started | -          |
 | 4. Settings & Polish                          | 0/0            | Not started | -          |
+
+## Backlog
+
+### Phase 999.1: Add Log-by-Day for Hydration (BACKLOG)
+
+**Goal:** [Captured for future planning]
+**Requirements:** TBD
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (promote with /gsd-review-backlog when ready)
