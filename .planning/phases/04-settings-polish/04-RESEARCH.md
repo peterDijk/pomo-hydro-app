@@ -55,6 +55,7 @@ This means settings views do NOT need to reference service objects for settings 
 ### Mid-Session Timer Recalculation (D-10)
 
 When a user changes `workDuration` mid-session while a Pomodoro timer is running:
+
 1. The `endDate` needs recalculating: `endDate = startDate + (newDuration * 60)`
 2. Since we store `endDate` (not startDate), we need: `newEndDate = endDate - (oldDuration * 60) + (newDuration * 60)`
 3. Simpler: `newEndDate = endDate + ((newDuration - oldDuration) * 60)`
@@ -66,13 +67,15 @@ For HydrationService: when `reminderInterval` changes, restart the reminder time
 ### Global Pause (D-07, D-08, D-09)
 
 `@AppStorage("allPaused")` is the single source of truth. When set to `true`:
+
 - PomodoroService: pause the running timer (if active), suppress auto-start
 - HydrationService: stop reminder timer
 - MenuBarView icon: override to `pause.circle`
 
 Implementation: Both services should check `allPaused` on their timer ticks. Or better: the settings/MenuBarView that toggles `allPaused` should directly call service pause/resume methods.
 
-Recommended approach: 
+Recommended approach:
+
 1. Add `@ObservationIgnored @AppStorage("allPaused") var allPaused: Bool = false` to each service
 2. Add `pauseAll()` and `resumeAll()` methods to each service
 3. The View that toggles pause calls these methods on both services via their environment references
@@ -84,7 +87,7 @@ enum SettingsTab: String, CaseIterable {
     case pomodoro
     case hydration
     case general
-    
+
     var label: String { ... }
     var icon: String { ... }  // SF Symbol name
 }
@@ -122,4 +125,5 @@ Button("Restore Defaults") {
 5. **allPaused state must be checked on timer tick**: If we just set the @AppStorage flag without actively stopping timers, timers will keep running. Need to actively pause/resume services when the flag changes.
 
 ---
-*Research completed: 2026-03-30*
+
+_Research completed: 2026-03-30_

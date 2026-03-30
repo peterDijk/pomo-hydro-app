@@ -54,15 +54,15 @@ New exceptions for settings window:
 
 Extends Phase 3. New elements map to existing or standard macOS settings roles.
 
-| Role                | SwiftUI Modifier        | Weight      | Usage                                         |
-| ------------------- | ----------------------- | ----------- | --------------------------------------------- |
-| Tab label           | `.font(.body)`          | `.regular`  | "Pomodoro" / "Hydration" / "General" tab text |
-| Setting label       | `.font(.body)`          | `.regular`  | "Work Duration", "Short Break", etc.          |
-| Setting value       | `.font(.body)`          | `.semibold` | "25 min" value display next to slider         |
-| Setting description | `.font(.caption)`       | `.regular`  | Optional hint text below a setting            |
-| Section header      | `.font(.headline)`      | `.semibold` | Section divider within a tab (if needed)      |
-| Button label        | `.font(.body)`          | `.regular`  | "Restore Defaults" button text                |
-| Pause label         | `.font(.callout)`       | `.regular`  | "Pause All" toggle label in popover footer    |
+| Role                | SwiftUI Modifier   | Weight      | Usage                                         |
+| ------------------- | ------------------ | ----------- | --------------------------------------------- |
+| Tab label           | `.font(.body)`     | `.regular`  | "Pomodoro" / "Hydration" / "General" tab text |
+| Setting label       | `.font(.body)`     | `.regular`  | "Work Duration", "Short Break", etc.          |
+| Setting value       | `.font(.body)`     | `.semibold` | "25 min" value display next to slider         |
+| Setting description | `.font(.caption)`  | `.regular`  | Optional hint text below a setting            |
+| Section header      | `.font(.headline)` | `.semibold` | Section divider within a tab (if needed)      |
+| Button label        | `.font(.body)`     | `.regular`  | "Restore Defaults" button text                |
+| Pause label         | `.font(.callout)`  | `.regular`  | "Pause All" toggle label in popover footer    |
 
 ---
 
@@ -88,60 +88,60 @@ Accent reserved for: Same as prior phases — interactive controls only (sliders
 
 ### Settings Window
 
-| Element                               | Copy                                                |
-| ------------------------------------- | --------------------------------------------------- |
-| **Window title**                      | "PomoHydro Settings"                                |
-| **Pomodoro tab label**                | "Pomodoro" with SF Symbol `timer`                   |
-| **Hydration tab label**               | "Hydration" with SF Symbol `drop.fill`              |
-| **General tab label**                 | "General" with SF Symbol `gearshape`                |
+| Element                 | Copy                                   |
+| ----------------------- | -------------------------------------- |
+| **Window title**        | "PomoHydro Settings"                   |
+| **Pomodoro tab label**  | "Pomodoro" with SF Symbol `timer`      |
+| **Hydration tab label** | "Hydration" with SF Symbol `drop.fill` |
+| **General tab label**   | "General" with SF Symbol `gearshape`   |
 
 ### Pomodoro Tab Settings
 
-| Element                               | Copy                                                |
-| ------------------------------------- | --------------------------------------------------- |
-| **Work duration label**               | "Work Duration"                                     |
-| **Work duration value format**        | "{N} min" (e.g., "25 min")                          |
-| **Work duration range**               | 5–60 min                                            |
-| **Short break label**                 | "Short Break"                                       |
-| **Short break value format**          | "{N} min" (e.g., "5 min")                           |
-| **Short break range**                 | 1–15 min                                            |
-| **Long break label**                  | "Long Break"                                        |
-| **Long break value format**           | "{N} min" (e.g., "15 min")                          |
-| **Long break range**                  | 5–30 min                                            |
-| **Sessions before long break label**  | "Sessions Before Long Break"                        |
-| **Sessions value format**             | "{N}" (e.g., "4")                                   |
-| **Sessions range**                    | 2–8                                                 |
-| **Auto-start break toggle**          | "Auto-Start Break"                                  |
-| **Auto-start work toggle**           | "Auto-Start Next Session"                           |
-| **Restore defaults button**           | "Restore Defaults"                                  |
+| Element                              | Copy                         |
+| ------------------------------------ | ---------------------------- |
+| **Work duration label**              | "Work Duration"              |
+| **Work duration value format**       | "{N} min" (e.g., "25 min")   |
+| **Work duration range**              | 5–60 min                     |
+| **Short break label**                | "Short Break"                |
+| **Short break value format**         | "{N} min" (e.g., "5 min")    |
+| **Short break range**                | 1–15 min                     |
+| **Long break label**                 | "Long Break"                 |
+| **Long break value format**          | "{N} min" (e.g., "15 min")   |
+| **Long break range**                 | 5–30 min                     |
+| **Sessions before long break label** | "Sessions Before Long Break" |
+| **Sessions value format**            | "{N}" (e.g., "4")            |
+| **Sessions range**                   | 2–8                          |
+| **Auto-start break toggle**          | "Auto-Start Break"           |
+| **Auto-start work toggle**           | "Auto-Start Next Session"    |
+| **Restore defaults button**          | "Restore Defaults"           |
 
 ### Hydration Tab Settings
 
-| Element                               | Copy                                                |
-| ------------------------------------- | --------------------------------------------------- |
-| **Reminder interval label**           | "Reminder Interval"                                 |
-| **Reminder interval value format**    | "{N} min" (e.g., "45 min")                          |
-| **Reminder interval range**           | 15–120 min                                          |
-| **Daily goal label**                  | "Daily Goal"                                        |
-| **Daily goal value format**           | "{N} glasses" (e.g., "8 glasses")                   |
-| **Daily goal range**                  | 1–20 glasses                                        |
-| **Restore defaults button**           | "Restore Defaults"                                  |
+| Element                            | Copy                              |
+| ---------------------------------- | --------------------------------- |
+| **Reminder interval label**        | "Reminder Interval"               |
+| **Reminder interval value format** | "{N} min" (e.g., "45 min")        |
+| **Reminder interval range**        | 15–120 min                        |
+| **Daily goal label**               | "Daily Goal"                      |
+| **Daily goal value format**        | "{N} glasses" (e.g., "8 glasses") |
+| **Daily goal range**               | 1–20 glasses                      |
+| **Restore defaults button**        | "Restore Defaults"                |
 
 ### General Tab
 
-| Element                               | Copy                                                |
-| ------------------------------------- | --------------------------------------------------- |
-| **Pause toggle label**                | "Pause All Reminders"                               |
-| **Pause description**                 | "Stops all timers and suppresses notifications"     |
-| **Restore defaults button**           | "Restore Defaults"                                  |
+| Element                     | Copy                                            |
+| --------------------------- | ----------------------------------------------- |
+| **Pause toggle label**      | "Pause All Reminders"                           |
+| **Pause description**       | "Stops all timers and suppresses notifications" |
+| **Restore defaults button** | "Restore Defaults"                              |
 
 ### Popover Footer (Updated)
 
-| Element                               | Copy                                                |
-| ------------------------------------- | --------------------------------------------------- |
-| **Pause toggle (popover)**            | Toggle with SF Symbol `pause.circle` / `play.circle`|
-| **Settings button**                   | "Settings…" with SF Symbol `gear` (unchanged)       |
-| **Quit button**                       | "Quit PomoHydro" (unchanged)                        |
+| Element                    | Copy                                                 |
+| -------------------------- | ---------------------------------------------------- |
+| **Pause toggle (popover)** | Toggle with SF Symbol `pause.circle` / `play.circle` |
+| **Settings button**        | "Settings…" with SF Symbol `gear` (unchanged)        |
+| **Quit button**            | "Quit PomoHydro" (unchanged)                         |
 
 Tone: Consistent with prior phases — clean, minimal, descriptive. Setting labels use standard macOS conventions (title case, no colons).
 
@@ -199,6 +199,7 @@ Per D-03: TabView with 3 tabs.
 ```
 
 Each slider row layout:
+
 ```
 ┌──────────────────── Slider Row ──────────────────────┐
 │  HStack {                                             │
@@ -262,12 +263,12 @@ Per D-07: Pause toggle added next to gear button.
 
 Per D-09: New paused state overrides all other icons.
 
-| App State    | SF Symbol          | Color    |
-| ------------ | ------------------ | -------- |
-| Idle         | `timer`            | default  |
-| Working      | `timer.circle.fill`| default  |
-| On break     | `cup.and.saucer`   | default  |
-| **Paused**   | `pause.circle`     | default  |
+| App State  | SF Symbol           | Color   |
+| ---------- | ------------------- | ------- |
+| Idle       | `timer`             | default |
+| Working    | `timer.circle.fill` | default |
+| On break   | `cup.and.saucer`    | default |
+| **Paused** | `pause.circle`      | default |
 
 Paused state takes highest priority — if paused while working, show `pause.circle` not `timer.circle.fill`.
 
@@ -315,10 +316,10 @@ Paused state takes highest priority — if paused while working, show `pause.cir
 
 ## Registry Safety
 
-| Registry        | Blocks Used | Safety Gate  |
-| --------------- | ----------- | ------------ |
-| SF Symbols      | System      | not required |
-| No third-party  | —           | —            |
+| Registry       | Blocks Used | Safety Gate  |
+| -------------- | ----------- | ------------ |
+| SF Symbols     | System      | not required |
+| No third-party | —           | —            |
 
 ---
 
