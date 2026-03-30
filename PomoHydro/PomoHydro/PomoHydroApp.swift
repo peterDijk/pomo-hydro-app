@@ -11,14 +11,19 @@ import SwiftUI
 struct PomoHydroApp: App {
     @State private var notificationService = NotificationService()
     @State private var pomodoroService = PomodoroService()
+    @State private var hydrationService = HydrationService()
 
     var body: some Scene {
         MenuBarExtra {
             MenuBarView()
                 .environment(notificationService)
                 .environment(pomodoroService)
+                .environment(hydrationService)
                 .task {
                     pomodoroService.setNotificationService(notificationService)
+                    hydrationService.setNotificationService(notificationService)
+                    notificationService.setHydrationService(hydrationService)
+                    hydrationService.startReminders()
                 }
         } label: {
             Image(systemName: pomodoroService.menuBarIcon)

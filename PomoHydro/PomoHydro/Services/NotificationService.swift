@@ -11,15 +11,57 @@ import Observation
 
 @Observable
 @MainActor
-final class NotificationService {
+final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
     var authorizationStatus: UNAuthorizationStatus = .notDetermined
 
     private let center = UNUserNotificationCenter.current()
 
-    init() {
+    // MARK: - Hydration Service Dependency
+    private var hydrationService: HydrationService?
+
+    func setHydrationService(_ service: HydrationService) {
+        self.hydrationService = service
+    }
+
+    override init() {
+        super.init()
+        center.delegate = self
+        registerCategories()
         Task {
             await checkStatus()
         }
+    }
+
+    // MARK: - Notification Categories
+
+    private func registerCategories() {
+        let logGlassAction = UNNotificationAction(
+            identifier: "LOG_GLASS",
+            title: "Log Glass",
+            options: .foreground
+        )
+        let hydrationCategory = UNNotificationCategory(
+            identifier: "HYDRATION_REMINDER",
+            actions: [logGlassAction],
+            intentIdentifiers: [],
+            options: []
+        )
+        center.setNotificationCategories([hydrationCategory])
+    }
+
+    // MARK: - UNUserNotificationCenterDelegate
+
+    nonisolated func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        if response.actionIdentifier == "LOG_GLASS" {
+            Task { @MainActor in
+                self.hydrationService?.logGlass()
+            }
+        }
+        completionHandler()
     }
 
     func checkStatus() async {
@@ -111,5 +153,41 @@ final class NotificationService {
 
     func cancelTimerNotifications() {
         center.removePendingNotificationRequests(withIdentifiers: ["work-complete", "break-complete"])
+    }
+
+    // MARK: - Hydration Notifications
+
+    func sendHydrationReminder() async {
+        let content = UNMutableNotificationContent()
+        content.title = "Time to Hydrate"
+        content.body = "Take a moment to drink some water."
+        content.sound = .default
+        content.categoryIdentifier = "HYDRATION_REMINDER"
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(
+            identifier: "hydration-reminder",
+            content: content,
+            trigger: trigger
+        )
+        try? await center.add(request)
+    }
+
+    func sendCombinedBreakNotification(includeEyeStrain: Bool) async {
+        let content = UNMutableNotificationContent()
+        content.title = "Break Time — Hydrate!"
+        content.body = includeEyeStrain
+            ? "Look away for 20 seconds, stretch, and drink some water."
+            : "Rest your eyes, stretch, and drink some water."
+        content.sound = .default
+        content.categoryIdentifier = "HYDRATION_REMINDER"
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(
+            identifier: "break-combined",
+            content: content,
+            trigger: trigger
+        )
+        try? await center.add(request)
     }
 }
