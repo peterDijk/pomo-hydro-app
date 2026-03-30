@@ -135,6 +135,9 @@ private struct HydrationSettingsTab: View {
                     hydrationService.restartWithNewInterval()
                 }
             sliderRow(label: "Daily Goal", value: $dailyWaterGoal, range: 1...20, format: "%d glasses")
+                .onChange(of: dailyWaterGoal) { _, _ in
+                    hydrationService.refreshGoal()
+                }
 
             Spacer()
 

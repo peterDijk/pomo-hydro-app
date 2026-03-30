@@ -33,6 +33,7 @@ final class HydrationService {
     // MARK: - Published State (drives UI)
     private(set) var glassesConsumed: Int = 0
     private(set) var totalMl: Int = 0
+    private(set) var currentGoal: Int = 8
     var selectedSize: GlassSize = .medium
 
     // MARK: - Settings (@ObservationIgnored required for @AppStorage in @Observable)
@@ -60,12 +61,12 @@ final class HydrationService {
     // MARK: - Computed Properties
 
     var progress: Double {
-        guard dailyWaterGoal > 0 else { return 0 }
-        return min(1.0, Double(glassesConsumed) / Double(dailyWaterGoal))
+        guard currentGoal > 0 else { return 0 }
+        return min(1.0, Double(glassesConsumed) / Double(currentGoal))
     }
 
     var goalReached: Bool {
-        glassesConsumed >= dailyWaterGoal
+        glassesConsumed >= currentGoal
     }
 
     var formattedMl: String {
@@ -88,6 +89,7 @@ final class HydrationService {
     private func restoreState() {
         // Restore glass count if same day (CROSS-02)
         let todayString = dateString(for: Date())
+        currentGoal = dailyWaterGoal
         if savedGlassesDateString == todayString {
             glassesConsumed = savedGlassesConsumed
             totalMl = savedTotalMl
@@ -133,6 +135,10 @@ final class HydrationService {
     func restartWithNewInterval() {
         guard !allPaused else { return }
         startReminderTimer()
+    }
+
+    func refreshGoal() {
+        currentGoal = dailyWaterGoal
     }
 
     /// Check if hydration reminder is due within the given time window (for merge window D-06)

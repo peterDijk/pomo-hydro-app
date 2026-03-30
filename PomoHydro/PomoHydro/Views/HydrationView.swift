@@ -19,7 +19,7 @@ struct HydrationView: View {
 
             // Glass count + unit
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(hydrationService.glassesConsumed) / \(hydrationService.dailyWaterGoal)")
+                Text("\(hydrationService.glassesConsumed) / \(hydrationService.currentGoal)")
                     .font(.title3)
                     .fontWeight(.semibold)
 
@@ -28,7 +28,7 @@ struct HydrationView: View {
                     .foregroundStyle(.secondary)
             }
             .accessibilityElement(children: .combine)
-            .accessibilityLabel("\(hydrationService.glassesConsumed) of \(hydrationService.dailyWaterGoal) glasses consumed, \(hydrationService.totalMl) milliliters")
+            .accessibilityLabel("\(hydrationService.glassesConsumed) of \(hydrationService.currentGoal) glasses consumed, \(hydrationService.totalMl) milliliters")
 
             // Progress bar with percentage
             HStack(spacing: 8) {
