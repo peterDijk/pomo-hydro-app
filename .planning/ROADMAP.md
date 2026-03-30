@@ -87,8 +87,12 @@ Decimal phases appear between their surrounding integers in numeric order.
 1. User can open a settings window from the dropdown with tabs for Pomodoro, Hydration, and General
 2. Changing any setting takes effect immediately without restarting the app
 3. User can pause all reminders temporarily from the dropdown and resume them later
-   **Plans**: TBD
-   **UI hint**: yes
+   **Plans:** 2 plans
+   Plans:
+
+- [ ] 04-01-PLAN.md — Settings window with TabView, gear button wiring, global pause service logic
+- [ ] 04-02-PLAN.md — Popover pause toggle, mid-session timer recalculation, human verification
+      **UI hint**: yes
 
 ## Progress
 
