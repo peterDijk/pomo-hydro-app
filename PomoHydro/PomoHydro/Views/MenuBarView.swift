@@ -10,9 +10,11 @@ import UserNotifications
 
 struct MenuBarView: View {
     @Environment(NotificationService.self) private var notificationService
+    @Environment(PomodoroService.self) private var pomodoroService
     @Environment(HydrationService.self) private var hydrationService
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.openWindow) private var openWindow
+    @AppStorage("allPaused") private var allPaused: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -35,8 +37,22 @@ struct MenuBarView: View {
 
             // Footer controls
             HStack {
-                Button {
-                    openWindow(id: "settings")
+                Button {                    allPaused.toggle()
+                    if allPaused {
+                        pomodoroService.pauseAll()
+                        hydrationService.stopReminders()
+                    } else {
+                        pomodoroService.resumeAll()
+                        hydrationService.startReminders()
+                    }
+                } label: {
+                    Image(systemName: allPaused ? "play.circle" : "pause.circle")
+                        .font(.callout)
+                }
+                .buttonStyle(.borderless)
+                .accessibilityLabel(allPaused ? "Resume all reminders" : "Pause all reminders")
+
+                Button {                    openWindow(id: "settings")
                 } label: {
                     Label("Settings…", systemImage: "gear")
                         .font(.callout)

@@ -205,6 +205,16 @@ final class PomodoroService {
         persistState()
     }
 
+    func recalculateEndDate(oldDuration: Int, newDuration: Int) {
+        guard state == .working || state == .shortBreak || state == .longBreak,
+              let currentEnd = endDate else { return }
+        let delta = TimeInterval((newDuration - oldDuration) * 60)
+        endDate = currentEnd.addingTimeInterval(delta)
+        totalSeconds = newDuration * 60
+        secondsRemaining = max(0, Int(ceil(endDate!.timeIntervalSinceNow)))
+        persistState()
+    }
+
     func skipAutoStart() {
         autoStartTimer?.invalidate()
         autoStartTimer = nil

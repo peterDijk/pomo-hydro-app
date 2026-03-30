@@ -72,12 +72,28 @@ private struct PomodoroSettingsTab: View {
     @AppStorage("sessionsBeforeLongBreak") private var sessionsBeforeLongBreak: Int = 4
     @AppStorage("autoStartBreak") private var autoStartBreak: Bool = true
     @AppStorage("autoStartWork") private var autoStartWork: Bool = true
+    @Environment(PomodoroService.self) private var pomodoroService
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             sliderRow(label: "Work Duration", value: $workDuration, range: 5...60, format: "%d min")
+                .onChange(of: workDuration) { oldValue, newValue in
+                    if pomodoroService.state == .working {
+                        pomodoroService.recalculateEndDate(oldDuration: oldValue, newDuration: newValue)
+                    }
+                }
             sliderRow(label: "Short Break", value: $shortBreakDuration, range: 1...15, format: "%d min")
+                .onChange(of: shortBreakDuration) { oldValue, newValue in
+                    if pomodoroService.state == .shortBreak {
+                        pomodoroService.recalculateEndDate(oldDuration: oldValue, newDuration: newValue)
+                    }
+                }
             sliderRow(label: "Long Break", value: $longBreakDuration, range: 5...30, format: "%d min")
+                .onChange(of: longBreakDuration) { oldValue, newValue in
+                    if pomodoroService.state == .longBreak {
+                        pomodoroService.recalculateEndDate(oldDuration: oldValue, newDuration: newValue)
+                    }
+                }
             sliderRow(label: "Sessions Before Long Break", value: $sessionsBeforeLongBreak, range: 2...8, format: "%d")
 
             Divider()
@@ -110,10 +126,14 @@ private struct PomodoroSettingsTab: View {
 private struct HydrationSettingsTab: View {
     @AppStorage("hydrationReminderInterval") private var reminderInterval: Int = 45
     @AppStorage("dailyWaterGoal") private var dailyWaterGoal: Int = 8
+    @Environment(HydrationService.self) private var hydrationService
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             sliderRow(label: "Reminder Interval", value: $reminderInterval, range: 15...120, format: "%d min")
+                .onChange(of: reminderInterval) { _, _ in
+                    hydrationService.restartWithNewInterval()
+                }
             sliderRow(label: "Daily Goal", value: $dailyWaterGoal, range: 1...20, format: "%d glasses")
 
             Spacer()

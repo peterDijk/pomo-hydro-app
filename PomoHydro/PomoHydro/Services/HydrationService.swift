@@ -130,6 +130,11 @@ final class HydrationService {
         persistState()
     }
 
+    func restartWithNewInterval() {
+        guard !allPaused else { return }
+        startReminderTimer()
+    }
+
     /// Check if hydration reminder is due within the given time window (for merge window D-06)
     func isHydrationDue(within seconds: TimeInterval) -> Bool {
         guard let end = reminderEndDate else { return false }
