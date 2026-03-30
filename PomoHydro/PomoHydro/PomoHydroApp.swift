@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct PomoHydroApp: App {
+    @State private var notificationService = NotificationService()
+
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        MenuBarExtra {
+            MenuBarView()
+                .environment(notificationService)
+        } label: {
+            Label("PomoHydro", systemImage: "timer")
         }
+        .menuBarExtraStyle(.window)
     }
 }
