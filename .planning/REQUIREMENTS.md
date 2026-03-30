@@ -37,7 +37,7 @@
 
 - [ ] **CROSS-01**: When a Pomodoro break starts, user receives a single combined notification: "Rest. Look away. Drink water." instead of separate alerts (the killer differentiator)
 - [ ] **CROSS-02**: Session count and glass count auto-reset at midnight daily
-- [ ] **CROSS-03**: User is prompted for notification permission on first launch; if denied, app shows in-app fallback explaining how to enable
+- [x] **CROSS-03**: User is prompted for notification permission on first launch; if denied, app shows in-app fallback explaining how to enable
 - [ ] **CROSS-04**: App prevents App Nap from throttling timers when any timer is active (ProcessInfo.beginActivity)
 - [ ] **CROSS-05**: All mutable state (timer end-times, glass count, session count) persists to UserDefaults on every mutation so state survives unexpected termination
 
@@ -77,7 +77,7 @@
 |--------|-------|--------|
 | UX-01 | Phase 1 | Complete |
 | UX-05 | Phase 1 | Complete |
-| CROSS-03 | Phase 1 | Pending |
+| CROSS-03 | Phase 1 | Complete |
 | POMO-01 | Phase 2 | Pending |
 | POMO-02 | Phase 2 | Pending |
 | POMO-03 | Phase 2 | Pending |

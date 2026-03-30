@@ -35,7 +35,7 @@ Decimal phases appear between their surrounding integers in numeric order.
    Plans:
 
 - [x] 01-01-PLAN.md — Xcode project, MenuBarExtra shell, NotificationService
-- [ ] 01-02-PLAN.md — Permission flow views, denied banner, test notification
+- [x] 01-02-PLAN.md — Permission flow views, denied banner, test notification
       **UI hint**: yes
 
 ### Phase 2: Pomodoro Timer & Eye-Strain
