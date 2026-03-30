@@ -289,19 +289,15 @@ final class PomodoroService {
             }
 
         case .shortBreak, .longBreak:
-            // Send break complete notification
+            // Send break complete notification — next session starts on user OK
             let isLong = state == .longBreak
             Task {
                 await notificationService?.sendBreakCompleteNotification(isLongBreak: isLong)
             }
 
-            if autoStartWork && !allPaused {
-                startAutoStartCountdown(nextState: .working)
-            } else {
-                state = .idle
-                endDate = nil
-                endAppNapPrevention()
-            }
+            state = .idle
+            endDate = nil
+            endAppNapPrevention()
 
         default:
             break

@@ -52,17 +52,17 @@ Post-v1.0 backlog items captured: hydration log-by-day, cloud collector, Slack i
 
 ## Key Decisions
 
-| Decision                                  | Rationale                                                          | Outcome      |
-| ----------------------------------------- | ------------------------------------------------------------------ | ------------ |
-| Menu bar app (no dock icon)               | Minimal footprint, always accessible, non-intrusive                | ✓ Good       |
-| Eye-strain folds into Pomodoro            | Avoids notification fatigue, natural pairing                       | ✓ Good       |
-| Fixed hydration interval (45 min default) | Simple, adjustable, no complex adaptive logic                      | ✓ Good       |
-| SwiftUI + native macOS                    | Best menu bar integration, native notifications, no Electron bloat | ✓ Good       |
-| 250mL per glass assumption                | Standard glass size, simplifies tracking                           | ✓ Good       |
-| Deadline-based timer (Date math)          | Accurate timing even with popover closed / App Nap                 | ✓ Good       |
-| Service wiring via set*Service() + .task  | Avoids init-order issues with @Observable                          | ✓ Good       |
-| Combined break notification (CROSS-01)    | Single "Rest. Look away. Drink." is the killer differentiator      | ✓ Good       |
-| @AppStorage for all persistence           | Simple, survives crashes, no CoreData overhead                     | ✓ Good       |
+| Decision                                  | Rationale                                                          | Outcome |
+| ----------------------------------------- | ------------------------------------------------------------------ | ------- |
+| Menu bar app (no dock icon)               | Minimal footprint, always accessible, non-intrusive                | ✓ Good  |
+| Eye-strain folds into Pomodoro            | Avoids notification fatigue, natural pairing                       | ✓ Good  |
+| Fixed hydration interval (45 min default) | Simple, adjustable, no complex adaptive logic                      | ✓ Good  |
+| SwiftUI + native macOS                    | Best menu bar integration, native notifications, no Electron bloat | ✓ Good  |
+| 250mL per glass assumption                | Standard glass size, simplifies tracking                           | ✓ Good  |
+| Deadline-based timer (Date math)          | Accurate timing even with popover closed / App Nap                 | ✓ Good  |
+| Service wiring via set\*Service() + .task | Avoids init-order issues with @Observable                          | ✓ Good  |
+| Combined break notification (CROSS-01)    | Single "Rest. Look away. Drink." is the killer differentiator      | ✓ Good  |
+| @AppStorage for all persistence           | Simple, survives crashes, no CoreData overhead                     | ✓ Good  |
 
 ## Evolution
 

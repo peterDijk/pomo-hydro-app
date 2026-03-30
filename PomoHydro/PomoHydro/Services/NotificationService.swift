@@ -23,6 +23,13 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
         self.hydrationService = service
     }
 
+    // MARK: - Pomodoro Service Dependency
+    private var pomodoroService: PomodoroService?
+
+    func setPomodoroService(_ service: PomodoroService) {
+        self.pomodoroService = service
+    }
+
     override init() {
         super.init()
         center.delegate = self
@@ -56,10 +63,22 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
             identifier: "EYE_STRAIN",
             actions: [okAction],
             intentIdentifiers: [],
-            options: []
+            options: .customDismissAction
         )
 
-        center.setNotificationCategories([hydrationCategory, eyeStrainCategory])
+        let startSessionAction = UNNotificationAction(
+            identifier: "START_SESSION",
+            title: "OK",
+            options: []
+        )
+        let breakCompleteCategory = UNNotificationCategory(
+            identifier: "BREAK_COMPLETE",
+            actions: [startSessionAction],
+            intentIdentifiers: [],
+            options: .customDismissAction
+        )
+
+        center.setNotificationCategories([hydrationCategory, eyeStrainCategory, breakCompleteCategory])
     }
 
     // MARK: - UNUserNotificationCenterDelegate
@@ -80,6 +99,10 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
         if response.actionIdentifier == "LOG_GLASS" {
             Task { @MainActor in
                 self.hydrationService?.logGlass()
+            }
+        } else if response.actionIdentifier == "START_SESSION" {
+            Task { @MainActor in
+                self.pomodoroService?.start()
             }
         }
         completionHandler()
@@ -147,6 +170,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
             ? "Feeling refreshed? Let's get back to it."
             : "Ready for another focus session?"
         content.sound = .default
+        content.categoryIdentifier = "BREAK_COMPLETE"
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(

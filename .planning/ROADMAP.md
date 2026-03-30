@@ -18,12 +18,12 @@
 
 ## Progress
 
-| Phase | Milestone | Plans Complete | Status | Completed |
-|-------|-----------|----------------|--------|-----------|
-| 1. App Shell & Notifications | v1.0 | 2/2 | Complete | 2026-03-30 |
-| 2. Pomodoro Timer & Eye-Strain | v1.0 | 3/3 | Complete | 2026-03-30 |
-| 3. Hydration Tracker & Combined Notifications | v1.0 | 2/2 | Complete | 2026-03-30 |
-| 4. Settings & Polish | v1.0 | 2/2 | Complete | 2026-03-30 |
+| Phase                                         | Milestone | Plans Complete | Status   | Completed  |
+| --------------------------------------------- | --------- | -------------- | -------- | ---------- |
+| 1. App Shell & Notifications                  | v1.0      | 2/2            | Complete | 2026-03-30 |
+| 2. Pomodoro Timer & Eye-Strain                | v1.0      | 3/3            | Complete | 2026-03-30 |
+| 3. Hydration Tracker & Combined Notifications | v1.0      | 2/2            | Complete | 2026-03-30 |
+| 4. Settings & Polish                          | v1.0      | 2/2            | Complete | 2026-03-30 |
 
 ## Backlog
 

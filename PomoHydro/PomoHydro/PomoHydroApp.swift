@@ -24,10 +24,11 @@ struct PomoHydroApp: App {
                     pomodoroService.setHydrationService(hydrationService)
                     hydrationService.setNotificationService(notificationService)
                     notificationService.setHydrationService(hydrationService)
+                    notificationService.setPomodoroService(pomodoroService)
                     hydrationService.startReminders()
                 }
         } label: {
-            Image(systemName: pomodoroService.menuBarIcon)
+            MenuBarIconView(state: pomodoroService.state, allPaused: pomodoroService.allPaused)
         }
         .menuBarExtraStyle(.window)
 
