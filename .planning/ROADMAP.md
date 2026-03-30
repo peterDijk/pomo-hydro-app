@@ -54,7 +54,7 @@ Decimal phases appear between their surrounding integers in numeric order.
    Plans:
 
 - [x] 02-01-PLAN.md — PomodoroService: state machine, timer, persistence, App Nap
-- [ ] 02-02-PLAN.md — Eye-strain sub-timer + all timer notifications
+- [x] 02-02-PLAN.md — Eye-strain sub-timer + all timer notifications
 - [ ] 02-03-PLAN.md — Timer ring UI, PomodoroView, menu bar icon
    **UI hint**: yes
 

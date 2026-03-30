@@ -8,14 +8,14 @@
 - [x] **POMO-02**: User can configure work duration (default 25 min) and short/long break durations (default 5 min / 15 min)
 - [x] **POMO-03**: App automatically offers a long break after every N work sessions (default 4, configurable)
 - [x] **POMO-04**: User can see how many Pomodoro sessions they've completed today (daily counter, resets at midnight)
-- [ ] **POMO-05**: User receives a native macOS notification when a work session or break ends
+- [x] **POMO-05**: User receives a native macOS notification when a work session or break ends
 - [x] **POMO-06**: User can toggle auto-start for the next session (auto-start work after break, auto-start break after work)
 
 ### Eye-Strain (20-20-20)
 
-- [ ] **EYE-01**: User receives a "look at something 20 feet away for 20 seconds" nudge at 20-minute intervals during work blocks
-- [ ] **EYE-02**: Eye-strain reminders fold into Pomodoro break notifications (no separate interruption)
-- [ ] **EYE-03**: User can skip/dismiss an eye-strain reminder from the notification
+- [x] **EYE-01**: User receives a "look at something 20 feet away for 20 seconds" nudge at 20-minute intervals during work blocks
+- [x] **EYE-02**: Eye-strain reminders fold into Pomodoro break notifications (no separate interruption)
+- [x] **EYE-03**: User can skip/dismiss an eye-strain reminder from the notification
 
 ### Hydration Tracker
 
@@ -82,11 +82,11 @@
 | POMO-02 | Phase 2 | Complete |
 | POMO-03 | Phase 2 | Complete |
 | POMO-04 | Phase 2 | Complete |
-| POMO-05 | Phase 2 | Pending |
+| POMO-05 | Phase 2 | Complete |
 | POMO-06 | Phase 2 | Complete |
-| EYE-01 | Phase 2 | Pending |
-| EYE-02 | Phase 2 | Pending |
-| EYE-03 | Phase 2 | Pending |
+| EYE-01 | Phase 2 | Complete |
+| EYE-02 | Phase 2 | Complete |
+| EYE-03 | Phase 2 | Complete |
 | UX-02 | Phase 2 | Pending |
 | CROSS-04 | Phase 2 | Complete |
 | CROSS-05 | Phase 2 | Complete |
