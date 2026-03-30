@@ -28,7 +28,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Clicking the menu bar icon opens a popover dropdown (scaffolding is fine)
   3. App requests notification permission on first launch and shows in-app guidance if permission is denied
   4. A test notification can be delivered through the app's notification infrastructure
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 01-01-PLAN.md — Xcode project, MenuBarExtra shell, NotificationService
+- [ ] 01-02-PLAN.md — Permission flow views, denied banner, test notification
 **UI hint**: yes
 
 ### Phase 2: Pomodoro Timer & Eye-Strain
