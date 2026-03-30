@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct MenuBarView: View {
     @Environment(NotificationService.self) private var notificationService
