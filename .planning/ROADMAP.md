@@ -13,10 +13,10 @@ PomoHydro delivers a native macOS menu bar health companion in four phases: firs
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: App Shell & Notifications** - Xcode project, menu bar presence, notification permission handling
-- [ ] **Phase 2: Pomodoro Timer & Eye-Strain** - Focus sessions with configurable durations, breaks, session counting, and 20-20-20 reminders
-- [ ] **Phase 3: Hydration Tracker & Combined Notifications** - Water logging, daily goals, independent reminders, and the unified break notification
-- [ ] **Phase 4: Settings & Polish** - Settings window with tabs, global pause, immediate-effect configuration
+- [x] **Phase 1: App Shell & Notifications** - Xcode project, menu bar presence, notification permission handling
+- [x] **Phase 2: Pomodoro Timer & Eye-Strain** - Focus sessions with configurable durations, breaks, session counting, and 20-20-20 reminders
+- [x] **Phase 3: Hydration Tracker & Combined Notifications** - Water logging, daily goals, independent reminders, and the unified break notification
+- [x] **Phase 4: Settings & Polish** - Settings window with tabs, global pause, immediate-effect configuration
 
 ## Phase Details
 
@@ -90,8 +90,8 @@ Decimal phases appear between their surrounding integers in numeric order.
    **Plans:** 2 plans
    Plans:
 
-- [ ] 04-01-PLAN.md — Settings window with TabView, gear button wiring, global pause service logic
-- [ ] 04-02-PLAN.md — Popover pause toggle, mid-session timer recalculation, human verification
+- [x] 04-01-PLAN.md — Settings window with TabView, gear button wiring, global pause service logic
+- [x] 04-02-PLAN.md — Popover pause toggle, mid-session timer recalculation, human verification
       **UI hint**: yes
 
 ## Progress
