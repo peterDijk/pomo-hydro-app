@@ -50,7 +50,12 @@ Decimal phases appear between their surrounding integers in numeric order.
 3. App automatically offers a long break after 4 work sessions, and the daily session counter shows completed count
 4. Menu bar icon visually changes between idle, working, and break states
 5. Timer runs accurately with popover closed (App Nap prevented) and all mutable state survives app restart
-   **Plans**: TBD
+   **Plans:** 3 plans
+   Plans:
+
+- [ ] 02-01-PLAN.md — PomodoroService: state machine, timer, persistence, App Nap
+- [ ] 02-02-PLAN.md — Eye-strain sub-timer + all timer notifications
+- [ ] 02-03-PLAN.md — Timer ring UI, PomodoroView, menu bar icon
    **UI hint**: yes
 
 ### Phase 3: Hydration Tracker & Combined Notifications
