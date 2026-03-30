@@ -16,7 +16,11 @@ affects: [02-pomodoro-timer]
 
 tech-stack:
   added: []
-  patterns: ["explain-then-request permission UX", "NSWorkspace deep link to System Settings"]
+  patterns:
+    [
+      "explain-then-request permission UX",
+      "NSWorkspace deep link to System Settings",
+    ]
 
 key-files:
   created: []
@@ -52,6 +56,7 @@ completed: 2026-03-30
 - **Files modified:** 3
 
 ## Accomplishments
+
 - PermissionPromptView with bell.badge icon, "Stay on Track" heading, borderedProminent CTA
 - NotificationDeniedBanner with orange warning, "Enable in System Settings" deep link
 - Test notification button for Phase 1 verification
@@ -66,26 +71,33 @@ Each task was committed atomically:
 2. **Task 2: Wire views into MenuBarView and add test notification trigger** — `ad28b29` (feat)
 
 ## Files Created/Modified
+
 - `PomoHydro/PomoHydro/Views/PermissionPromptView.swift` — Full permission explanation + CTA (replaced stub)
 - `PomoHydro/PomoHydro/Views/NotificationDeniedBanner.swift` — Persistent denied banner with System Settings link (replaced stub)
 - `PomoHydro/PomoHydro/Views/MenuBarView.swift` — Added test notification button + accessibility labels
 
 ## Decisions Made
+
 - Used safe `if let` URL unwrapping for System Settings deep link instead of force unwrap (security)
 - Test notification button scoped to authorized state only (not visible in other states)
 
 ## Deviations from Plan
+
 None — plan executed exactly as written. Stubs from Plan 01-01 replaced with full implementations.
 
 ## Issues Encountered
+
 None.
 
 ## User Setup Required
+
 None — no external service configuration required.
 
 ## Next Phase Readiness
+
 Phase 1 complete. All three popover states functional: permission prompt, granted placeholder, denied banner. Test notification infrastructure verified. Ready for Phase 2: Pomodoro Timer & Eye-Strain.
 
 ---
-*Phase: 01-app-shell-notifications*
-*Completed: 2026-03-30*
+
+_Phase: 01-app-shell-notifications_
+_Completed: 2026-03-30_

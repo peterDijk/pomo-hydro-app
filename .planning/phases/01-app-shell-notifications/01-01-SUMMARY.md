@@ -17,7 +17,12 @@ affects: [01-02, 02-pomodoro-timer]
 
 tech-stack:
   added: [SwiftUI MenuBarExtra, UserNotifications, Observation framework]
-  patterns: ["@Observable service injection via .environment()", "scenePhase monitoring for popover re-focus", "LSUIElement for menu-bar-only app"]
+  patterns:
+    [
+      "@Observable service injection via .environment()",
+      "scenePhase monitoring for popover re-focus",
+      "LSUIElement for menu-bar-only app",
+    ]
 
 key-files:
   created:
@@ -60,6 +65,7 @@ completed: 2026-03-30
 - **Files modified:** 6
 
 ## Accomplishments
+
 - Xcode project created with LSUIElement=YES, Swift 6 strict concurrency
 - MenuBarExtra with `timer` SF Symbol, `.window` style popover at 320pt width
 - NotificationService tracks UNAuthorizationStatus reactively via @Observable
@@ -75,10 +81,12 @@ Each task was committed atomically:
 3. **Task 3: Implement NotificationService with authorization tracking** — `babe7b0` (feat)
 
 **Cleanup commits:**
+
 - `a1d1afd` — chore: remove default ContentView.swift
 - `0e22929` — fix: add UserNotifications import and stub views for compilation
 
 ## Files Created/Modified
+
 - `PomoHydro/PomoHydro/PomoHydroApp.swift` — @main entry point with MenuBarExtra scene
 - `PomoHydro/PomoHydro/Services/NotificationService.swift` — @Observable notification wrapper
 - `PomoHydro/PomoHydro/Views/MenuBarView.swift` — Root popover view with auth status switching
@@ -87,6 +95,7 @@ Each task was committed atomically:
 - `PomoHydro/PomoHydro/Views/NotificationDeniedBanner.swift` — Stub (Plan 01-02 replaces)
 
 ## Decisions Made
+
 - Xcode project structure: `PomoHydro/PomoHydro/` (standard Xcode nesting, deeper than plan expected)
 - All plan file paths adapted from `PomoHydro/` to `PomoHydro/PomoHydro/` to match actual layout
 
@@ -95,6 +104,7 @@ Each task was committed atomically:
 ### Auto-fixed Issues
 
 **1. [Rule 3 - Blocking] File path nesting mismatch**
+
 - **Found during:** Task 2 (MenuBarExtra shell)
 - **Issue:** Plan referenced `PomoHydro/*.swift` but Xcode created `PomoHydro/PomoHydro/*.swift`
 - **Fix:** All files created at `PomoHydro/PomoHydro/` path
@@ -103,6 +113,7 @@ Each task was committed atomically:
 - **Committed in:** 5284c06
 
 **2. [Rule 3 - Blocking] Missing UserNotifications import in MenuBarView**
+
 - **Found during:** Build verification
 - **Issue:** MenuBarView.swift switches on UNAuthorizationStatus cases but only imports SwiftUI
 - **Fix:** Added `import UserNotifications`
@@ -111,6 +122,7 @@ Each task was committed atomically:
 - **Committed in:** 0e22929
 
 **3. [Rule 3 - Blocking] Missing stub views for compilation**
+
 - **Found during:** Build verification
 - **Issue:** MenuBarView references PermissionPromptView and NotificationDeniedBanner (Plan 01-02)
 - **Fix:** Created minimal stub views to enable compilation
@@ -124,14 +136,18 @@ Each task was committed atomically:
 **Impact on plan:** All fixes necessary for compilation. No scope creep. Stubs will be replaced by Plan 01-02.
 
 ## Issues Encountered
+
 None — build compiles cleanly after blocking fixes.
 
 ## User Setup Required
+
 None — no external service configuration required.
 
 ## Next Phase Readiness
+
 Ready for Plan 01-02 (Wave 2): PermissionPromptView, NotificationDeniedBanner, and test notification wiring. Stub views exist and will be replaced with full implementations.
 
 ---
-*Phase: 01-app-shell-notifications*
-*Completed: 2026-03-30*
+
+_Phase: 01-app-shell-notifications_
+_Completed: 2026-03-30_
