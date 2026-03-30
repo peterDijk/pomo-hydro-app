@@ -30,5 +30,13 @@ struct PomoHydroApp: App {
             Image(systemName: pomodoroService.menuBarIcon)
         }
         .menuBarExtraStyle(.window)
+
+        Window("PomoHydro Settings", id: "settings") {
+            SettingsView()
+                .environment(pomodoroService)
+                .environment(hydrationService)
+        }
+        .defaultSize(width: 450, height: 350)
+        .windowResizability(.contentSize)
     }
 }

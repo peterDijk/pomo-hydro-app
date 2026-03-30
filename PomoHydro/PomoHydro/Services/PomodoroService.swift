@@ -34,6 +34,7 @@ final class PomodoroService {
     @ObservationIgnored @AppStorage("sessionsBeforeLongBreak") var sessionsBeforeLongBreak: Int = 4
     @ObservationIgnored @AppStorage("autoStartBreak") var autoStartBreak: Bool = true
     @ObservationIgnored @AppStorage("autoStartWork") var autoStartWork: Bool = true
+    @ObservationIgnored @AppStorage("allPaused") var allPaused: Bool = false
 
     // MARK: - Crash Recovery Persistence (CROSS-05)
     @ObservationIgnored @AppStorage("savedEndTime") private var savedEndTimeInterval: Double = 0
@@ -75,6 +76,7 @@ final class PomodoroService {
     }
 
     var menuBarIcon: String {
+        if allPaused { return "pause.circle" }
         switch state {
         case .idle, .autoStartCountdown: return "timer"
         case .working: return "timer.circle.fill"
@@ -131,6 +133,7 @@ final class PomodoroService {
     // MARK: - Public Actions
 
     func start() {
+        guard !allPaused else { return }
         state = .working
         totalSeconds = workDuration * 60
         secondsRemaining = totalSeconds
@@ -176,6 +179,30 @@ final class PomodoroService {
 
     func skip() {
         completeCurrentPhase()
+    }
+
+    func pauseAll() {
+        switch state {
+        case .working, .shortBreak, .longBreak:
+            pause()
+        case .autoStartCountdown:
+            autoStartTimer?.invalidate()
+            autoStartTimer = nil
+            pendingAutoStartState = nil
+            state = .idle
+        default:
+            break
+        }
+        stopEyeStrainTimer()
+        endAppNapPrevention()
+    }
+
+    func resumeAll() {
+        state = .idle
+        secondsRemaining = 0
+        totalSeconds = 0
+        endDate = nil
+        persistState()
     }
 
     func skipAutoStart() {
@@ -242,7 +269,7 @@ final class PomodoroService {
                 (sessionsCompleted % sessionsBeforeLongBreak == 0)
                 ? .longBreak : .shortBreak
 
-            if autoStartBreak {
+            if autoStartBreak && !allPaused {
                 startAutoStartCountdown(nextState: nextBreakState)
             } else {
                 state = .idle
@@ -257,7 +284,7 @@ final class PomodoroService {
                 await notificationService?.sendBreakCompleteNotification(isLongBreak: isLong)
             }
 
-            if autoStartWork {
+            if autoStartWork && !allPaused {
                 startAutoStartCountdown(nextState: .working)
             } else {
                 state = .idle

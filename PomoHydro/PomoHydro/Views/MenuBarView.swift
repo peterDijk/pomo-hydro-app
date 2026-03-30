@@ -12,6 +12,7 @@ struct MenuBarView: View {
     @Environment(NotificationService.self) private var notificationService
     @Environment(HydrationService.self) private var hydrationService
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         VStack(spacing: 0) {
@@ -35,7 +36,7 @@ struct MenuBarView: View {
             // Footer controls
             HStack {
                 Button {
-                    // Settings — Phase 4
+                    openWindow(id: "settings")
                 } label: {
                     Label("Settings…", systemImage: "gear")
                         .font(.callout)

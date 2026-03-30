@@ -38,6 +38,7 @@ final class HydrationService {
     // MARK: - Settings (@ObservationIgnored required for @AppStorage in @Observable)
     @ObservationIgnored @AppStorage("hydrationReminderInterval") var reminderInterval: Int = 45
     @ObservationIgnored @AppStorage("dailyWaterGoal") var dailyWaterGoal: Int = 8
+    @ObservationIgnored @AppStorage("allPaused") var allPaused: Bool = false
 
     // MARK: - Persistence
     @ObservationIgnored @AppStorage("savedGlassesConsumed") private var savedGlassesConsumed: Int = 0
@@ -118,6 +119,7 @@ final class HydrationService {
     }
 
     func startReminders() {
+        guard !allPaused else { return }
         startReminderTimer()
     }
 
@@ -154,6 +156,7 @@ final class HydrationService {
 
     private func tick() {
         checkMidnightReset()
+        guard !allPaused else { return }
 
         guard let reminderEndDate else { return }
         if Date() >= reminderEndDate {
