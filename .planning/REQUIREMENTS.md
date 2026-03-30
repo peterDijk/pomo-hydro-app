@@ -4,12 +4,12 @@
 
 ### Pomodoro Timer
 
-- [ ] **POMO-01**: User can start, stop, and pause a Pomodoro work session from the menu bar dropdown
-- [ ] **POMO-02**: User can configure work duration (default 25 min) and short/long break durations (default 5 min / 15 min)
-- [ ] **POMO-03**: App automatically offers a long break after every N work sessions (default 4, configurable)
-- [ ] **POMO-04**: User can see how many Pomodoro sessions they've completed today (daily counter, resets at midnight)
+- [x] **POMO-01**: User can start, stop, and pause a Pomodoro work session from the menu bar dropdown
+- [x] **POMO-02**: User can configure work duration (default 25 min) and short/long break durations (default 5 min / 15 min)
+- [x] **POMO-03**: App automatically offers a long break after every N work sessions (default 4, configurable)
+- [x] **POMO-04**: User can see how many Pomodoro sessions they've completed today (daily counter, resets at midnight)
 - [ ] **POMO-05**: User receives a native macOS notification when a work session or break ends
-- [ ] **POMO-06**: User can toggle auto-start for the next session (auto-start work after break, auto-start break after work)
+- [x] **POMO-06**: User can toggle auto-start for the next session (auto-start work after break, auto-start break after work)
 
 ### Eye-Strain (20-20-20)
 
@@ -38,8 +38,8 @@
 - [ ] **CROSS-01**: When a Pomodoro break starts, user receives a single combined notification: "Rest. Look away. Drink water." instead of separate alerts (the killer differentiator)
 - [ ] **CROSS-02**: Session count and glass count auto-reset at midnight daily
 - [x] **CROSS-03**: User is prompted for notification permission on first launch; if denied, app shows in-app fallback explaining how to enable
-- [ ] **CROSS-04**: App prevents App Nap from throttling timers when any timer is active (ProcessInfo.beginActivity)
-- [ ] **CROSS-05**: All mutable state (timer end-times, glass count, session count) persists to UserDefaults on every mutation so state survives unexpected termination
+- [x] **CROSS-04**: App prevents App Nap from throttling timers when any timer is active (ProcessInfo.beginActivity)
+- [x] **CROSS-05**: All mutable state (timer end-times, glass count, session count) persists to UserDefaults on every mutation so state survives unexpected termination
 
 ### Settings
 
@@ -78,18 +78,18 @@
 | UX-01 | Phase 1 | Complete |
 | UX-05 | Phase 1 | Complete |
 | CROSS-03 | Phase 1 | Complete |
-| POMO-01 | Phase 2 | Pending |
-| POMO-02 | Phase 2 | Pending |
-| POMO-03 | Phase 2 | Pending |
-| POMO-04 | Phase 2 | Pending |
+| POMO-01 | Phase 2 | Complete |
+| POMO-02 | Phase 2 | Complete |
+| POMO-03 | Phase 2 | Complete |
+| POMO-04 | Phase 2 | Complete |
 | POMO-05 | Phase 2 | Pending |
-| POMO-06 | Phase 2 | Pending |
+| POMO-06 | Phase 2 | Complete |
 | EYE-01 | Phase 2 | Pending |
 | EYE-02 | Phase 2 | Pending |
 | EYE-03 | Phase 2 | Pending |
 | UX-02 | Phase 2 | Pending |
-| CROSS-04 | Phase 2 | Pending |
-| CROSS-05 | Phase 2 | Pending |
+| CROSS-04 | Phase 2 | Complete |
+| CROSS-05 | Phase 2 | Complete |
 | HYDR-01 | Phase 3 | Pending |
 | HYDR-02 | Phase 3 | Pending |
 | HYDR-03 | Phase 3 | Pending |
