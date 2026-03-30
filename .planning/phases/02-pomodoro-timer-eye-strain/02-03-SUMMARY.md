@@ -16,7 +16,12 @@ affects: [03-hydration-combined, 04-settings-polish]
 
 tech-stack:
   added: []
-  patterns: ["Circle().trim for progress ring", "@Environment(PomodoroService.self) in views", "Dynamic MenuBarExtra label via Image(systemName:)"]
+  patterns:
+    [
+      "Circle().trim for progress ring",
+      "@Environment(PomodoroService.self) in views",
+      "Dynamic MenuBarExtra label via Image(systemName:)",
+    ]
 
 key-files:
   created:
@@ -55,6 +60,7 @@ completed: 2026-03-30
 - **Files modified:** 5
 
 ## Accomplishments
+
 - Created TimerRingView with 160pt diameter, 10pt rounded stroke, secondary background track, clockwise progress from 12 o'clock
 - Built PomodoroView handling all timer states: idle (Start Focus CTA), active (ring + countdown + session count + controls), auto-start (5-second countdown with "Start Now" skip)
 - Added Pause/Resume toggle using isPaused computed property
@@ -68,6 +74,7 @@ completed: 2026-03-30
 1. **Tasks 1-3: TimerRingView + PomodoroView + Dynamic icon** - `38e0d66` (feat)
 
 ## Files Created/Modified
+
 - `PomoHydro/PomoHydro/Views/TimerRingView.swift` - Reusable circular progress ring component
 - `PomoHydro/PomoHydro/Views/PomodoroView.swift` - Main timer view with all states and controls
 - `PomoHydro/PomoHydro/Views/MenuBarView.swift` - Replaced PlaceholderContentView with PomodoroView
@@ -79,6 +86,7 @@ completed: 2026-03-30
 ### Auto-fixed Issues
 
 **1. [Rule 2 - Missing Functionality] Added pendingAutoStartStateName computed property**
+
 - **Found during:** Task 2
 - **Issue:** PomodoroView needed to differentiate "Break starting in..." vs "Work starting in..." during auto-start countdown, but pendingAutoStartState was private
 - **Fix:** Added `var pendingAutoStartStateName: String?` computed property exposing the raw value

@@ -16,7 +16,11 @@ affects: [02-03, 03-hydration-combined]
 
 tech-stack:
   added: []
-  patterns: ["setNotificationService() injection for @Observable service cross-communication", "Timer-based 20-min eye-strain interval with suppression"]
+  patterns:
+    [
+      "setNotificationService() injection for @Observable service cross-communication",
+      "Timer-based 20-min eye-strain interval with suppression",
+    ]
 
 key-files:
   created: []
@@ -52,6 +56,7 @@ completed: 2026-03-30
 - **Files modified:** 3
 
 ## Accomplishments
+
 - Added 4 notification methods to NotificationService: sendWorkCompleteNotification, sendBreakCompleteNotification, sendEyeStrainNotification, cancelTimerNotifications
 - Implemented eye-strain sub-timer that fires every 20 minutes during work sessions
 - D-04 suppression: when break is within 3 minutes, eye-strain is suppressed and "look away" copy folded into the break notification via includeEyeStrain parameter
@@ -63,6 +68,7 @@ completed: 2026-03-30
 1. **Tasks 1+2: Notification methods + eye-strain sub-timer** - `d1c47dc` (feat)
 
 ## Files Created/Modified
+
 - `PomoHydro/PomoHydro/Services/NotificationService.swift` - Added sendWorkCompleteNotification, sendBreakCompleteNotification, sendEyeStrainNotification, cancelTimerNotifications
 - `PomoHydro/PomoHydro/Services/PomodoroService.swift` - Added eye-strain sub-timer, notification triggers, NotificationService dependency
 - `PomoHydro/PomoHydro/PomoHydroApp.swift` - Added .task modifier wiring NotificationService to PomodoroService
