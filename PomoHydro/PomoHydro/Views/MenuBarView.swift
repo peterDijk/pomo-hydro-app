@@ -52,7 +52,8 @@ struct MenuBarView: View {
                 .buttonStyle(.borderless)
                 .accessibilityLabel(allPaused ? "Resume all reminders" : "Pause all reminders")
 
-                Button {                    openWindow(id: "settings")
+                Button {                    NSApplication.shared.activate(ignoringOtherApps: true)
+                    openWindow(id: "settings")
                 } label: {
                     Label("Settings…", systemImage: "gear")
                         .font(.callout)
