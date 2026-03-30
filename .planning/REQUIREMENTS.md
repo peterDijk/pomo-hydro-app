@@ -27,11 +27,11 @@
 
 ### Menu Bar UX
 
-- [ ] **UX-01**: App lives in the macOS menu bar with no Dock icon (LSUIElement)
+- [x] **UX-01**: App lives in the macOS menu bar with no Dock icon (LSUIElement)
 - [ ] **UX-02**: Menu bar icon reflects live state (idle, working, on break)
 - [ ] **UX-03**: Dropdown shows active timer countdown and current water count
 - [ ] **UX-04**: User can pause all reminders temporarily from the dropdown
-- [ ] **UX-05**: App respects macOS Do Not Disturb (handled automatically by UNUserNotificationCenter)
+- [x] **UX-05**: App respects macOS Do Not Disturb (handled automatically by UNUserNotificationCenter)
 
 ### Cross-Cutting
 
@@ -75,8 +75,8 @@
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| UX-01 | Phase 1 | Pending |
-| UX-05 | Phase 1 | Pending |
+| UX-01 | Phase 1 | Complete |
+| UX-05 | Phase 1 | Complete |
 | CROSS-03 | Phase 1 | Pending |
 | POMO-01 | Phase 2 | Pending |
 | POMO-02 | Phase 2 | Pending |
