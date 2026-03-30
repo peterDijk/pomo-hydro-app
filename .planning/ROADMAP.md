@@ -140,9 +140,10 @@ Plans:
 
 ### Phase 999.4: Add Waterdrop to Menubar Icon (BACKLOG)
 
-**Goal:** [Captured for future planning]
+**Goal:** Replace SF Symbol menu bar icon with custom-drawn composite clock+waterdrop brand mark
 **Requirements:** TBD
-**Plans:** 0 plans
+**Plans:** 1 plan
 
 Plans:
-- [ ] TBD (promote with /gsd-review-backlog when ready)
+
+- [ ] 999.4-01-PLAN.md — Custom MenuBarIconView + wiring + human verification
