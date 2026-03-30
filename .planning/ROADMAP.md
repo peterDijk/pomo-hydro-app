@@ -70,7 +70,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 3. User can set a daily water goal and see progress toward it in the dropdown
 4. When a Pomodoro break starts, user receives ONE combined notification: "Rest. Look away. Drink water."
 5. Session count and glass count auto-reset at midnight
-   **Plans**: TBD
+   **Plans:** 2 plans
+   Plans:
+
+- [ ] 03-01-PLAN.md — HydrationService engine + NotificationService extensions + app wiring
+- [ ] 03-02-PLAN.md — HydrationView UI, MenuBarView integration, combined notification logic
    **UI hint**: yes
 
 ### Phase 4: Settings & Polish
