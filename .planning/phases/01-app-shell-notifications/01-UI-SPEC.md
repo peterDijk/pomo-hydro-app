@@ -18,13 +18,13 @@ created: 2026-03-30
 
 ## Design System
 
-| Property | Value |
-|----------|-------|
-| Tool | Not applicable (native macOS) |
-| Preset | Not applicable |
-| Component library | SwiftUI (macOS 14+ / Sonoma) |
-| Icon library | SF Symbols (system-provided) |
-| Font | San Francisco (system default via SwiftUI `Font` API) |
+| Property          | Value                                                 |
+| ----------------- | ----------------------------------------------------- |
+| Tool              | Not applicable (native macOS)                         |
+| Preset            | Not applicable                                        |
+| Component library | SwiftUI (macOS 14+ / Sonoma)                          |
+| Icon library      | SF Symbols (system-provided)                          |
+| Font              | San Francisco (system default via SwiftUI `Font` API) |
 
 ---
 
@@ -32,15 +32,16 @@ created: 2026-03-30
 
 Declared values (multiples of 4, in points):
 
-| Token | Value | SwiftUI Usage |
-|-------|-------|---------------|
-| xs | 4pt | `.padding(4)` — icon-to-label gaps, inline spacing |
-| sm | 8pt | `.padding(8)` — compact element spacing, stack spacing |
-| md | 16pt | `.padding(16)` — default content padding, popover edge insets |
-| lg | 24pt | `.padding(24)` — section separation within popover |
-| xl | 32pt | `.spacing(32)` — major section breaks |
+| Token | Value | SwiftUI Usage                                                 |
+| ----- | ----- | ------------------------------------------------------------- |
+| xs    | 4pt   | `.padding(4)` — icon-to-label gaps, inline spacing            |
+| sm    | 8pt   | `.padding(8)` — compact element spacing, stack spacing        |
+| md    | 16pt  | `.padding(16)` — default content padding, popover edge insets |
+| lg    | 24pt  | `.padding(24)` — section separation within popover            |
+| xl    | 32pt  | `.spacing(32)` — major section breaks                         |
 
 Exceptions:
+
 - Popover content area uses 16pt edge insets on all sides (md)
 - VStack default spacing within sections: 8pt (sm)
 - Banner internal padding: 12pt horizontal, 8pt vertical (contextual, between sm and md)
@@ -51,14 +52,15 @@ Exceptions:
 
 All roles use the San Francisco system font via SwiftUI `Font` text styles. Do NOT specify raw font names — use the `.font()` modifier with these styles:
 
-| Role | SwiftUI Style | Rendered Size (macOS) | Weight | Line Height |
-|------|---------------|-----------------------|--------|-------------|
-| Title | `.title3` | 15pt | `.semibold` | System default (~1.2) |
-| Body | `.body` | 13pt | `.regular` | System default (~1.4) |
-| Label | `.callout` | 12pt | `.regular` | System default (~1.3) |
-| Caption | `.footnote` | 10pt | `.regular` | System default (~1.2) |
+| Role    | SwiftUI Style | Rendered Size (macOS) | Weight      | Line Height           |
+| ------- | ------------- | --------------------- | ----------- | --------------------- |
+| Title   | `.title3`     | 15pt                  | `.semibold` | System default (~1.2) |
+| Body    | `.body`       | 13pt                  | `.regular`  | System default (~1.4) |
+| Label   | `.callout`    | 12pt                  | `.regular`  | System default (~1.3) |
+| Caption | `.footnote`   | 10pt                  | `.regular`  | System default (~1.2) |
 
 Rules:
+
 - Maximum 2 weights used across the entire phase: `.regular` (400) and `.semibold` (600)
 - Title style (`.title3`) reserved for the popover header ("PomoHydro") and permission prompt heading only
 - Body style (`.body`) is the default for all content text
@@ -71,16 +73,17 @@ Rules:
 
 All colors use macOS semantic color APIs. Do NOT hardcode hex values — the app must support both light and dark mode automatically.
 
-| Role | SwiftUI Value | Usage |
-|------|---------------|-------|
-| Dominant (60%) | System window background (automatic via `MenuBarExtra(.window)`) | Popover background — no manual color needed |
-| Secondary (30%) | `Color(.controlBackgroundColor)` | Banner background, grouped content areas |
-| Accent (10%) | `.accentColor` (system blue) | Primary CTA button, "Enable in System Settings" link |
-| Warning | `.orange` | Notification-denied banner icon only |
-| Primary text | `.primary` | All headings and body text |
-| Secondary text | `.secondary` | Placeholder body copy, caption text |
+| Role            | SwiftUI Value                                                    | Usage                                                |
+| --------------- | ---------------------------------------------------------------- | ---------------------------------------------------- |
+| Dominant (60%)  | System window background (automatic via `MenuBarExtra(.window)`) | Popover background — no manual color needed          |
+| Secondary (30%) | `Color(.controlBackgroundColor)`                                 | Banner background, grouped content areas             |
+| Accent (10%)    | `.accentColor` (system blue)                                     | Primary CTA button, "Enable in System Settings" link |
+| Warning         | `.orange`                                                        | Notification-denied banner icon only                 |
+| Primary text    | `.primary`                                                       | All headings and body text                           |
+| Secondary text  | `.secondary`                                                     | Placeholder body copy, caption text                  |
 
 Accent reserved for:
+
 - "Enable Notifications" button (permission prompt CTA)
 - "Enable in System Settings" link text in denied banner
 - No other elements in Phase 1 use accent color
@@ -93,11 +96,11 @@ Dark mode handling: All semantic colors adapt automatically. No conditional colo
 
 ### Dimensions
 
-| Property | Value | Source |
-|----------|-------|--------|
-| Width | 320pt | Decision D-02 |
-| Height | ~400pt (content-driven) | Decision D-02 |
-| Style | `.menuBarExtraStyle(.window)` | Decision D-02 |
+| Property | Value                         | Source        |
+| -------- | ----------------------------- | ------------- |
+| Width    | 320pt                         | Decision D-02 |
+| Height   | ~400pt (content-driven)       | Decision D-02 |
+| Style    | `.menuBarExtraStyle(.window)` | Decision D-02 |
 
 ### Structure
 
@@ -124,21 +127,21 @@ The popover has a fixed-width vertical layout:
 
 ### Footer Controls
 
-| Element | Style | Position |
-|---------|-------|----------|
-| Settings button | `.buttonStyle(.borderless)`, SF Symbol `gear`, `.callout` label | Leading |
-| Quit button | `.buttonStyle(.borderless)`, `.secondary` text color, `.callout` label | Trailing |
-| Separator | `Divider()` above the footer row | Full width |
+| Element         | Style                                                                  | Position   |
+| --------------- | ---------------------------------------------------------------------- | ---------- |
+| Settings button | `.buttonStyle(.borderless)`, SF Symbol `gear`, `.callout` label        | Leading    |
+| Quit button     | `.buttonStyle(.borderless)`, `.secondary` text color, `.callout` label | Trailing   |
+| Separator       | `Divider()` above the footer row                                       | Full width |
 
 ---
 
 ## Menu Bar Icon
 
-| Property | Value | Source |
-|----------|-------|--------|
-| SF Symbol | `timer` | Decision D-01 |
-| Rendering | Automatic (system handles light/dark, active/inactive) | macOS standard |
-| Size | System default for menu bar items (automatic via `MenuBarExtra` label) | macOS standard |
+| Property  | Value                                                                  | Source         |
+| --------- | ---------------------------------------------------------------------- | -------------- |
+| SF Symbol | `timer`                                                                | Decision D-01  |
+| Rendering | Automatic (system handles light/dark, active/inactive)                 | macOS standard |
+| Size      | System default for menu bar items (automatic via `MenuBarExtra` label) | macOS standard |
 
 Phase 1 uses a single static icon. Phase 2 will add state-specific icon changes.
 
@@ -183,6 +186,7 @@ MenuBarExtra("PomoHydro", systemImage: "timer") {
 ```
 
 **Interaction:**
+
 1. User reads explanation (Decision D-03: explain before prompting)
 2. User taps "Enable Notifications"
 3. App calls `UNUserNotificationCenter.requestAuthorization(options: [.alert, .sound])`
@@ -191,6 +195,7 @@ MenuBarExtra("PomoHydro", systemImage: "timer") {
 6. If denied → transition to State 3
 
 **Spacing detail:**
+
 - Icon to title: 16pt (md)
 - Title to body: 8pt (sm)
 - Body to button: 24pt (lg)
@@ -246,18 +251,19 @@ MenuBarExtra("PomoHydro", systemImage: "timer") {
 
 **Banner specification:**
 
-| Property | Value |
-|----------|-------|
-| Background | `Color(.controlBackgroundColor)` with 8pt corner radius |
-| Icon | SF Symbol `exclamationmark.triangle.fill`, `.orange`, 12pt |
-| Text line 1 | "Notifications are off." — `.callout`, `.primary` weight `.semibold` |
-| Text line 2 | "Enable in System Settings" — `.callout`, `.accentColor`, tappable |
-| Layout | HStack: icon (leading) + VStack of text lines | 
-| Internal padding | 12pt horizontal, 8pt vertical |
-| External margin | 16pt from popover edges (md), 8pt below banner (sm) |
-| Persistence | Always visible when status is `.denied` — non-dismissable |
+| Property         | Value                                                                |
+| ---------------- | -------------------------------------------------------------------- |
+| Background       | `Color(.controlBackgroundColor)` with 8pt corner radius              |
+| Icon             | SF Symbol `exclamationmark.triangle.fill`, `.orange`, 12pt           |
+| Text line 1      | "Notifications are off." — `.callout`, `.primary` weight `.semibold` |
+| Text line 2      | "Enable in System Settings" — `.callout`, `.accentColor`, tappable   |
+| Layout           | HStack: icon (leading) + VStack of text lines                        |
+| Internal padding | 12pt horizontal, 8pt vertical                                        |
+| External margin  | 16pt from popover edges (md), 8pt below banner (sm)                  |
+| Persistence      | Always visible when status is `.denied` — non-dismissable            |
 
 **Interaction:**
+
 1. User taps "Enable in System Settings"
 2. App opens `NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.Notifications-Settings")!)`
 3. Banner remains until user grants permission and returns (checked on popover re-open)
@@ -266,18 +272,18 @@ MenuBarExtra("PomoHydro", systemImage: "timer") {
 
 ## Copywriting Contract
 
-| Element | Copy | Notes |
-|---------|------|-------|
-| Primary CTA | "Enable Notifications" | Permission prompt button; verb + noun |
-| Pre-prompt heading | "Stay on Track" | Benefit-oriented, not technical |
-| Pre-prompt body | "PomoHydro needs notifications to remind you to rest and stay hydrated." | Source: Decision D-03 |
-| Pre-prompt footnote | "You can change this later in System Settings" | Reduces commitment anxiety |
-| Empty state heading | "PomoHydro" | App name as heading in placeholder state |
-| Empty state body | "Your timers will appear here.\nMore features coming soon." | Sets expectation for Phase 2+ |
-| Denied banner line 1 | "Notifications are off." | Factual, not alarming (Decision D-04) |
-| Denied banner line 2 | "Enable in System Settings" | Actionable link text |
-| Quit action | "Quit PomoHydro" | Standard macOS convention |
-| Settings action | "Settings…" | Standard macOS convention (with ellipsis) |
+| Element              | Copy                                                                     | Notes                                     |
+| -------------------- | ------------------------------------------------------------------------ | ----------------------------------------- |
+| Primary CTA          | "Enable Notifications"                                                   | Permission prompt button; verb + noun     |
+| Pre-prompt heading   | "Stay on Track"                                                          | Benefit-oriented, not technical           |
+| Pre-prompt body      | "PomoHydro needs notifications to remind you to rest and stay hydrated." | Source: Decision D-03                     |
+| Pre-prompt footnote  | "You can change this later in System Settings"                           | Reduces commitment anxiety                |
+| Empty state heading  | "PomoHydro"                                                              | App name as heading in placeholder state  |
+| Empty state body     | "Your timers will appear here.\nMore features coming soon."              | Sets expectation for Phase 2+             |
+| Denied banner line 1 | "Notifications are off."                                                 | Factual, not alarming (Decision D-04)     |
+| Denied banner line 2 | "Enable in System Settings"                                              | Actionable link text                      |
+| Quit action          | "Quit PomoHydro"                                                         | Standard macOS convention                 |
+| Settings action      | "Settings…"                                                              | Standard macOS convention (with ellipsis) |
 
 No destructive actions exist in Phase 1.
 
@@ -287,40 +293,40 @@ No destructive actions exist in Phase 1.
 
 SwiftUI views needed for Phase 1:
 
-| View | Responsibility | File |
-|------|---------------|------|
-| `MenuBarView` | Root popover content, switches between states | `Views/MenuBarView.swift` |
-| `PermissionPromptView` | First-launch notification explanation + CTA | `Views/PermissionPromptView.swift` |
-| `NotificationDeniedBanner` | Persistent banner when permission denied | `Views/NotificationDeniedBanner.swift` |
-| `PlaceholderContentView` | Empty state placeholder for future timer sections | `Views/PlaceholderContentView.swift` |
-| `MenuBarLabel` | Menu bar icon label (static `timer` symbol) | `Views/MenuBarLabel.swift` |
+| View                       | Responsibility                                    | File                                   |
+| -------------------------- | ------------------------------------------------- | -------------------------------------- |
+| `MenuBarView`              | Root popover content, switches between states     | `Views/MenuBarView.swift`              |
+| `PermissionPromptView`     | First-launch notification explanation + CTA       | `Views/PermissionPromptView.swift`     |
+| `NotificationDeniedBanner` | Persistent banner when permission denied          | `Views/NotificationDeniedBanner.swift` |
+| `PlaceholderContentView`   | Empty state placeholder for future timer sections | `Views/PlaceholderContentView.swift`   |
+| `MenuBarLabel`             | Menu bar icon label (static `timer` symbol)       | `Views/MenuBarLabel.swift`             |
 
 Service:
 
-| Service | Responsibility | File |
-|---------|---------------|------|
+| Service               | Responsibility                                                      | File                                 |
+| --------------------- | ------------------------------------------------------------------- | ------------------------------------ |
 | `NotificationService` | `@Observable`, wraps `UNUserNotificationCenter`, tracks auth status | `Services/NotificationService.swift` |
 
 ---
 
 ## Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| VoiceOver labels | All SF Symbols must have `.accessibilityLabel()` set |
-| Button accessible | "Enable Notifications" button: `.accessibilityHint("Triggers the system notification permission dialog")` |
-| Banner link | "Enable in System Settings" link: `.accessibilityRole(.link)` |
-| Popover | `MenuBarExtra` handles VoiceOver focus management automatically |
-| Keyboard navigation | Tab through interactive elements; Return to activate CTA |
-| Reduced Motion | No custom animations in Phase 1 — nothing to gate |
+| Requirement         | Implementation                                                                                            |
+| ------------------- | --------------------------------------------------------------------------------------------------------- |
+| VoiceOver labels    | All SF Symbols must have `.accessibilityLabel()` set                                                      |
+| Button accessible   | "Enable Notifications" button: `.accessibilityHint("Triggers the system notification permission dialog")` |
+| Banner link         | "Enable in System Settings" link: `.accessibilityRole(.link)`                                             |
+| Popover             | `MenuBarExtra` handles VoiceOver focus management automatically                                           |
+| Keyboard navigation | Tab through interactive elements; Return to activate CTA                                                  |
+| Reduced Motion      | No custom animations in Phase 1 — nothing to gate                                                         |
 
 ---
 
 ## Registry Safety
 
-| Registry | Blocks Used | Safety Gate |
-|----------|-------------|-------------|
-| Not applicable | — | Native macOS app, no package registries |
+| Registry       | Blocks Used | Safety Gate                             |
+| -------------- | ----------- | --------------------------------------- |
+| Not applicable | —           | Native macOS app, no package registries |
 
 ---
 
