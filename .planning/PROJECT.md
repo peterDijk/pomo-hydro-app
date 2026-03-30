@@ -12,20 +12,19 @@ Keep you healthy and focused during long work sessions — without getting in th
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] macOS native app (SwiftUI) — Validated in Phase 1: App Shell & Notifications
+- [x] Native macOS notifications for all reminders — Validated in Phase 1: App Shell & Notifications
+- [x] Pomodoro timer with configurable work/break durations — Validated in Phase 2: Pomodoro Timer & Eye-Strain
+- [x] 20-20-20 eye-strain reminders at 20-minute intervals during Pomodoro work blocks — Validated in Phase 2: Pomodoro Timer & Eye-Strain
+- [x] Combined break notification that mentions both rest and eye strain — Validated in Phase 2: Pomodoro Timer & Eye-Strain
+- [x] Menu bar icon with dropdown showing active timer countdown and water count — Validated in Phase 3: Hydration Tracker & Combined Notifications
+- [x] Hydration reminders at configurable intervals (default 45 min) — Validated in Phase 3: Hydration Tracker & Combined Notifications
+- [x] Log glasses of water with a single action — Validated in Phase 3: Hydration Tracker & Combined Notifications
+- [x] Track daily water count (glasses + derived mL) — Validated in Phase 3: Hydration Tracker & Combined Notifications
 
 ### Active
 
-- [ ] Pomodoro timer with configurable work/break durations
-- [ ] 20-20-20 eye-strain reminders at 20-minute intervals during Pomodoro work blocks
-- [ ] Combined break notification that mentions both rest and eye strain
-- [ ] Hydration reminders at configurable intervals (default 45 min)
-- [ ] Log glasses of water with a single action
-- [ ] Track daily water count (glasses + derived mL)
-- [ ] Menu bar icon with dropdown showing active timer countdown and water count
 - [ ] Config button in dropdown that opens a settings modal
-- [ ] Native macOS notifications for all reminders
-- [ ] macOS native app (SwiftUI)
 
 ### Out of Scope
 
@@ -81,4 +80,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ---
 
-_Last updated: 2026-03-30 after initialization_
+_Last updated: 2026-03-30 — Phase 3 (Hydration Tracker & Combined Notifications) complete. 3 of 4 phases done._
