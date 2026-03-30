@@ -10,6 +10,7 @@ import UserNotifications
 
 struct MenuBarView: View {
     @Environment(NotificationService.self) private var notificationService
+    @Environment(HydrationService.self) private var hydrationService
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
@@ -24,6 +25,10 @@ struct MenuBarView: View {
             default:
                 PomodoroView()
             }
+
+            Divider()
+
+            HydrationView()
 
             Divider()
 

@@ -49,6 +49,13 @@ final class PomodoroService {
         self.notificationService = service
     }
 
+    // MARK: - Hydration Service Dependency (CROSS-01)
+    private var hydrationService: HydrationService?
+
+    func setHydrationService(_ service: HydrationService) {
+        self.hydrationService = service
+    }
+
     // MARK: - Internal Timer State
     private var endDate: Date?
     private var displayTimer: Timer?
@@ -217,9 +224,17 @@ final class PomodoroService {
         case .working:
             sessionsCompleted += 1
 
-            // Send work complete notification — fold eye-strain if suppressed (EYE-02)
+            // CROSS-01: Check if hydration is due within 5-minute merge window (D-06)
+            let hydrationDue = hydrationService?.isHydrationDue(within: 300) ?? false
             Task {
-                await notificationService?.sendWorkCompleteNotification(includeEyeStrain: eyeStrainSuppressed)
+                if hydrationDue {
+                    // Send combined notification instead of separate work-complete + hydration
+                    await notificationService?.sendCombinedBreakNotification(includeEyeStrain: eyeStrainSuppressed)
+                    // Reset hydration reminder since we just notified
+                    hydrationService?.startReminders()
+                } else {
+                    await notificationService?.sendWorkCompleteNotification(includeEyeStrain: eyeStrainSuppressed)
+                }
             }
             stopEyeStrainTimer()
 

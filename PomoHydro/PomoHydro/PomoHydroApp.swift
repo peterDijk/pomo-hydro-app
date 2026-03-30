@@ -21,6 +21,7 @@ struct PomoHydroApp: App {
                 .environment(hydrationService)
                 .task {
                     pomodoroService.setNotificationService(notificationService)
+                    pomodoroService.setHydrationService(hydrationService)
                     hydrationService.setNotificationService(notificationService)
                     notificationService.setHydrationService(hydrationService)
                     hydrationService.startReminders()
