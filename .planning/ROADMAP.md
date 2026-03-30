@@ -74,7 +74,7 @@ Decimal phases appear between their surrounding integers in numeric order.
    Plans:
 
 - [x] 03-01-PLAN.md — HydrationService engine + NotificationService extensions + app wiring
-- [ ] 03-02-PLAN.md — HydrationView UI, MenuBarView integration, combined notification logic
+- [x] 03-02-PLAN.md — HydrationView UI, MenuBarView integration, combined notification logic
    **UI hint**: yes
 
 ### Phase 4: Settings & Polish
