@@ -46,10 +46,31 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
             intentIdentifiers: [],
             options: []
         )
-        center.setNotificationCategories([hydrationCategory])
+
+        let okAction = UNNotificationAction(
+            identifier: "EYE_STRAIN_OK",
+            title: "OK",
+            options: []
+        )
+        let eyeStrainCategory = UNNotificationCategory(
+            identifier: "EYE_STRAIN",
+            actions: [okAction],
+            intentIdentifiers: [],
+            options: []
+        )
+
+        center.setNotificationCategories([hydrationCategory, eyeStrainCategory])
     }
 
     // MARK: - UNUserNotificationCenterDelegate
+
+    nonisolated func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.banner, .sound])
+    }
 
     nonisolated func userNotificationCenter(
         _ center: UNUserNotificationCenter,
@@ -141,6 +162,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
         content.title = "Rest Your Eyes"
         content.body = "Look at something 20 feet away for 20 seconds."
         content.sound = .default
+        content.categoryIdentifier = "EYE_STRAIN"
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(
