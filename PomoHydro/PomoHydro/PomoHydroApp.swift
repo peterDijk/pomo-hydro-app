@@ -21,7 +21,7 @@ struct PomoHydroApp: App {
                     pomodoroService.setNotificationService(notificationService)
                 }
         } label: {
-            Label("PomoHydro", systemImage: "timer")
+            Image(systemName: pomodoroService.menuBarIcon)
         }
         .menuBarExtraStyle(.window)
     }

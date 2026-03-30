@@ -396,4 +396,9 @@ final class PomodoroService {
     var isPaused: Bool {
         state == .working && endDate == nil
     }
+
+    /// Name of the pending auto-start state for UI label customization
+    var pendingAutoStartStateName: String? {
+        pendingAutoStartState?.rawValue
+    }
 }

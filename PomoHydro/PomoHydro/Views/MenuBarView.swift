@@ -20,20 +20,9 @@ struct MenuBarView: View {
                 PermissionPromptView()
             case .denied:
                 NotificationDeniedBanner()
-                PlaceholderContentView()
+                PomodoroView()
             default:
-                PlaceholderContentView()
-                // TODO: Remove after Phase 1 verification
-                Button("Send Test Notification") {
-                    Task {
-                        await notificationService.sendTestNotification()
-                    }
-                }
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .buttonStyle(.borderless)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 8)
+                PomodoroView()
             }
 
             Divider()
