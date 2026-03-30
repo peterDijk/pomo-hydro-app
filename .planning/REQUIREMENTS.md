@@ -73,11 +73,35 @@
 
 ## Traceability
 
-*Populated by roadmapper — maps REQ-IDs to phases.*
-
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| — | — | — |
+| UX-01 | Phase 1 | Pending |
+| UX-05 | Phase 1 | Pending |
+| CROSS-03 | Phase 1 | Pending |
+| POMO-01 | Phase 2 | Pending |
+| POMO-02 | Phase 2 | Pending |
+| POMO-03 | Phase 2 | Pending |
+| POMO-04 | Phase 2 | Pending |
+| POMO-05 | Phase 2 | Pending |
+| POMO-06 | Phase 2 | Pending |
+| EYE-01 | Phase 2 | Pending |
+| EYE-02 | Phase 2 | Pending |
+| EYE-03 | Phase 2 | Pending |
+| UX-02 | Phase 2 | Pending |
+| CROSS-04 | Phase 2 | Pending |
+| CROSS-05 | Phase 2 | Pending |
+| HYDR-01 | Phase 3 | Pending |
+| HYDR-02 | Phase 3 | Pending |
+| HYDR-03 | Phase 3 | Pending |
+| HYDR-04 | Phase 3 | Pending |
+| HYDR-05 | Phase 3 | Pending |
+| UX-03 | Phase 3 | Pending |
+| CROSS-01 | Phase 3 | Pending |
+| CROSS-02 | Phase 3 | Pending |
+| SET-01 | Phase 4 | Pending |
+| SET-02 | Phase 4 | Pending |
+| SET-03 | Phase 4 | Pending |
+| UX-04 | Phase 4 | Pending |
 
 ---
 *Created: 2026-03-30*
