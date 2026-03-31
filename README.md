@@ -10,10 +10,11 @@ It seamlessly bundles a **Pomodoro timer**, **20-20-20 eye-strain reminders**, a
 
 ### 1. Installation
 
-_If you received a `.app` or `.dmg` file:_
+Download the latest release .zip file from the Releases page and unpack to find the PomoHydro.app file.
 
 1. Drag **PomoHydro.app** into your `/Applications` folder.
 2. Double-click to launch. You will see a new icon (a clock with a water droplet) appear in your macOS menu bar at the top right of your screen.
+   _(Note: If macOS blocks the app from opening, see the [Troubleshooting (macOS Gatekeeper)](#troubleshooting-macos-gatekeeper) section)._
 
 ### 2. Permissions
 
@@ -90,3 +91,37 @@ Here you can configure:
 
 - **Crash Recovery:** Accidental force quit? PomoHydro constantly saves its state. Just reopen the app, and your active Pomodoro timer and daily water count will pick up exactly where they left off.
 - **App Nap Prevention:** macOS loves to put background apps to sleep ("App Nap") to save battery. PomoHydro uses native system APIs to ensure timers stay 100% accurate, even when tucked away in the background.
+
+---
+
+## Troubleshooting (macOS Gatekeeper)
+
+Because PomoHydro is independently distributed and not yet notarized via the paid Apple Developer Program, macOS Gatekeeper may show a warning when you first open the downloaded app (e.g., _"Apple could not verify PomoHydro is free of malware"_).
+
+This is completely normal for open-source and independent apps. **You can safely bypass this using one of these methods:**
+
+### Method 1: The "Right-Click" Trick (Easiest)
+
+Do this exactly once to permanently whitelist the app:
+
+1. Open **Finder** and locate `PomoHydro.app`.
+2. **Right-click** (or hold `Control` and click) on the app.
+3. Choose **Open** from the context menu.
+4. The warning will appear again, but this time it will have an **"Open"** button. Click it.
+
+### Method 2: System Settings
+
+1. Attempt to open the app normally by double-clicking.
+2. Click "Done" or "Cancel" on the warning prompt.
+3. Open **System Settings > Privacy & Security**.
+4. Scroll down until you see the message _"PomoHydro was blocked from use because it is not from an identified developer."_
+5. Click **Open Anyway**.
+
+### Method 3: Terminal (If macOS says the app is "damaged")
+
+If macOS is overly aggressive and claims the app is corrupted:
+
+1. Ensure `PomoHydro.app` is in your `/Applications` folder.
+2. Open the **Terminal** app.
+3. Run this command to remove the quarantine flag: `xattr -cr /Applications/PomoHydro.app`
+4. You can now open the app normally!
