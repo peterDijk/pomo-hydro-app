@@ -4,6 +4,8 @@
 
 It seamlessly bundles a **Pomodoro timer**, **20-20-20 eye-strain reminders**, and a **hydration tracker** into one lightweight, beautiful app that lives right in your menu bar.
 
+See [CHANGELOG.md](CHANGELOG.md) for post-`v1.0` changes and release notes.
+
 ---
 
 ## Getting Started
@@ -33,8 +35,8 @@ PomoHydro relies heavily on macOS system notifications.
 A 5-state timer that keeps your work structured into manageable sprints and rewarding breaks.
 
 - **Start a Focus Session:** Click the menu bar icon and hit "Start Session."
-- **Work Phase (Default: 25 min):** The menu bar icon turns into a filled circle with clock hands. Work uninterrupted until you receive a notification.
-- **Break Phase (Default: 5 min):** Take a short break! When your work block ends, you'll get a unified notification: _"Rest. Look away. Drink water."_
+- **Work Phase (Default: 50 min):** The menu bar icon turns into a filled circle with clock hands. Work uninterrupted until you receive a notification.
+- **Break Phase (Default: 10 min):** Take a short break! When your work block ends, you'll get a unified notification: _"Rest. Look away. Drink water."_
 - **Long Break:** After completing 4 sessions (configurable), the app automatically suggests a Long Break (default 15 mins) to help you fully recover.
 - **Manual Control:** You can Pause, Resume, or Stop a session directly from the menu bar dropdown at any time.
 

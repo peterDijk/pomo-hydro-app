@@ -28,14 +28,15 @@ final class PomodoroService {
     private(set) var autoStartSecondsRemaining: Int = 5
 
     // MARK: - Settings (@ObservationIgnored required for @AppStorage in @Observable)
-    @ObservationIgnored @AppStorage("workDuration") var workDuration: Int = 25
-    @ObservationIgnored @AppStorage("shortBreakDuration") var shortBreakDuration: Int = 5
+    @ObservationIgnored @AppStorage("workDuration") var workDuration: Int = 50
+    @ObservationIgnored @AppStorage("shortBreakDuration") var shortBreakDuration: Int = 10
     @ObservationIgnored @AppStorage("longBreakDuration") var longBreakDuration: Int = 15
     @ObservationIgnored @AppStorage("sessionsBeforeLongBreak") var sessionsBeforeLongBreak: Int = 4
     @ObservationIgnored @AppStorage("autoStartBreak") var autoStartBreak: Bool = true
     @ObservationIgnored @AppStorage("autoStartWork") var autoStartWork: Bool = true
     @ObservationIgnored @AppStorage("allPaused") var allPaused: Bool = false
     @ObservationIgnored @AppStorage("eyeStrainInterval") var eyeStrainInterval: Int = 20
+    @ObservationIgnored @AppStorage("eyeStrainSuppressBeforeBreak") var eyeStrainSuppressBeforeBreak: Int = 5
 
     // MARK: - Crash Recovery Persistence (CROSS-05)
     @ObservationIgnored @AppStorage("savedEndTime") private var savedEndTimeInterval: Double = 0
@@ -127,6 +128,9 @@ final class PomodoroService {
             totalSeconds = savedTotalSeconds > 0 ? savedTotalSeconds : remaining
             secondsRemaining = remaining
             beginAppNapPrevention()
+            if savedState == .working {
+                startEyeStrainTimer()
+            }
             startDisplayTimer()
         }
     }
@@ -384,10 +388,10 @@ final class PomodoroService {
     }
 
     private func handleEyeStrainTick() async {
-        // D-04: If break is starting within 3 minutes, suppress and fold into break notification
+        // D-04: If break is starting within the configured window, suppress and fold into break notification
         guard state == .working, let endDate else { return }
         let timeUntilBreak = endDate.timeIntervalSinceNow
-        if timeUntilBreak <= 180 {
+        if timeUntilBreak <= TimeInterval(eyeStrainSuppressBeforeBreak * 60) {
             eyeStrainSuppressed = true
             return
         }

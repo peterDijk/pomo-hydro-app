@@ -12,6 +12,15 @@ import Observation
 @Observable
 @MainActor
 final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
+    private enum NotificationIdentifier {
+        static let workComplete = "work-complete"
+        static let breakComplete = "break-complete"
+        static let hydrationReminder = "hydration-reminder"
+        static let breakCombined = "break-combined"
+        static let eyeStrainPrefix = "eye-strain-"
+        static let eyeStrainFollowUpPrefix = "eye-strain-follow-up-"
+    }
+
     var authorizationStatus: UNAuthorizationStatus = .notDetermined
 
     private let center = UNUserNotificationCenter.current()
@@ -156,7 +165,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(
-            identifier: "work-complete",
+            identifier: NotificationIdentifier.workComplete,
             content: content,
             trigger: trigger
         )
@@ -174,7 +183,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(
-            identifier: "break-complete",
+            identifier: NotificationIdentifier.breakComplete,
             content: content,
             trigger: trigger
         )
@@ -182,6 +191,8 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
     }
 
     func sendEyeStrainNotification() async {
+        let reminderId = UUID().uuidString
+
         let content = UNMutableNotificationContent()
         content.title = "Rest Your Eyes"
         content.body = "Look at something 20 feet away for 20 seconds."
@@ -190,15 +201,41 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(
-            identifier: "eye-strain-\(UUID().uuidString)",
+            identifier: "\(NotificationIdentifier.eyeStrainPrefix)\(reminderId)",
             content: content,
             trigger: trigger
         )
+
+        let followUpContent = UNMutableNotificationContent()
+        followUpContent.title = "Eye Break Complete"
+        followUpContent.body = "20 seconds are up. You can get back to work."
+        followUpContent.sound = .default
+
+        let followUpTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
+        let followUpRequest = UNNotificationRequest(
+            identifier: "\(NotificationIdentifier.eyeStrainFollowUpPrefix)\(reminderId)",
+            content: followUpContent,
+            trigger: followUpTrigger
+        )
+
         try? await center.add(request)
+        try? await center.add(followUpRequest)
     }
 
     func cancelTimerNotifications() {
-        center.removePendingNotificationRequests(withIdentifiers: ["work-complete", "break-complete"])
+        center.getPendingNotificationRequests { [center] requests in
+            let identifiers = requests.compactMap { request -> String? in
+                let identifier = request.identifier
+                if identifier == NotificationIdentifier.workComplete ||
+                    identifier == NotificationIdentifier.breakComplete ||
+                    identifier.hasPrefix(NotificationIdentifier.eyeStrainPrefix) ||
+                    identifier.hasPrefix(NotificationIdentifier.eyeStrainFollowUpPrefix) {
+                    return identifier
+                }
+                return nil
+            }
+            center.removePendingNotificationRequests(withIdentifiers: identifiers)
+        }
     }
 
     // MARK: - Hydration Notifications
@@ -212,7 +249,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(
-            identifier: "hydration-reminder",
+            identifier: NotificationIdentifier.hydrationReminder,
             content: content,
             trigger: trigger
         )
@@ -230,7 +267,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(
-            identifier: "break-combined",
+            identifier: NotificationIdentifier.breakCombined,
             content: content,
             trigger: trigger
         )

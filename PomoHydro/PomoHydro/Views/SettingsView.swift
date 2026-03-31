@@ -66,13 +66,14 @@ struct SettingsView: View {
 // MARK: - Pomodoro Settings Tab
 
 private struct PomodoroSettingsTab: View {
-    @AppStorage("workDuration") private var workDuration: Int = 25
-    @AppStorage("shortBreakDuration") private var shortBreakDuration: Int = 5
+    @AppStorage("workDuration") private var workDuration: Int = 50
+    @AppStorage("shortBreakDuration") private var shortBreakDuration: Int = 10
     @AppStorage("longBreakDuration") private var longBreakDuration: Int = 15
     @AppStorage("sessionsBeforeLongBreak") private var sessionsBeforeLongBreak: Int = 4
     @AppStorage("autoStartBreak") private var autoStartBreak: Bool = true
     @AppStorage("autoStartWork") private var autoStartWork: Bool = true
     @AppStorage("eyeStrainInterval") private var eyeStrainInterval: Int = 20
+    @AppStorage("eyeStrainSuppressBeforeBreak") private var eyeStrainSuppressBeforeBreak: Int = 5
     @Environment(PomodoroService.self) private var pomodoroService
 
     var body: some View {
@@ -97,6 +98,7 @@ private struct PomodoroSettingsTab: View {
                 }
             sliderRow(label: "Sessions Before Long Break", value: $sessionsBeforeLongBreak, range: 2...8, format: "%d")
             sliderRow(label: "Eye-Strain Reminder", value: $eyeStrainInterval, range: 1...30, format: "%d min")
+            sliderRow(label: "Skip Eye-Strain Reminder Near Break", value: $eyeStrainSuppressBeforeBreak, range: 0...10, format: "<= %d min")
 
             Divider()
                 .padding(.vertical, 4)
@@ -109,11 +111,12 @@ private struct PomodoroSettingsTab: View {
             HStack {
                 Spacer()
                 Button("Restore Defaults") {
-                    workDuration = 25
-                    shortBreakDuration = 5
+                    workDuration = 50
+                    shortBreakDuration = 10
                     longBreakDuration = 15
                     sessionsBeforeLongBreak = 4
                     eyeStrainInterval = 20
+                    eyeStrainSuppressBeforeBreak = 5
                     autoStartBreak = true
                     autoStartWork = true
                 }
