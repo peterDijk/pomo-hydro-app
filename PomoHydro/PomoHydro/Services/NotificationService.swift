@@ -19,6 +19,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
         static let breakCombined = "break-combined"
         static let eyeStrainPrefix = "eye-strain-"
         static let eyeStrainFollowUpPrefix = "eye-strain-follow-up-"
+        static let freshAirPrefix = "fresh-air-"
     }
 
     var authorizationStatus: UNAuthorizationStatus = .notDetermined
@@ -153,14 +154,14 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
 
     // MARK: - Timer Notifications
 
-    func sendWorkCompleteNotification(includeEyeStrain: Bool) async {
+    func sendWorkCompleteNotification(includeEyeStrain: Bool, includeFreshAir: Bool = false) async {
         let content = UNMutableNotificationContent()
         content.title = "Time for a Break!"
-        if includeEyeStrain {
-            content.body = "Great focus! Look at something 20 feet away and stretch."
-        } else {
-            content.body = "Great focus! Rest your eyes and stretch."
-        }
+        var parts: [String] = ["Great focus!"]
+        if includeEyeStrain { parts.append("Look at something 20 feet away.") }
+        if includeFreshAir { parts.append("Step outside for some fresh air.") }
+        parts.append("Rest your eyes and stretch.")
+        content.body = parts.joined(separator: " ")
         content.sound = .default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
@@ -222,6 +223,24 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
         try? await center.add(followUpRequest)
     }
 
+    func sendFreshAirNotification() async {
+        let reminderId = UUID().uuidString
+
+        let content = UNMutableNotificationContent()
+        content.title = "Get Some Fresh Air"
+        content.body = "Step outside for a few minutes and breathe some fresh air."
+        content.sound = .default
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(
+            identifier: "\(NotificationIdentifier.freshAirPrefix)\(reminderId)",
+            content: content,
+            trigger: trigger
+        )
+
+        try? await center.add(request)
+    }
+
     func cancelTimerNotifications() {
         center.getPendingNotificationRequests { [center] requests in
             let identifiers = requests.compactMap { request -> String? in
@@ -229,7 +248,8 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
                 if identifier == NotificationIdentifier.workComplete ||
                     identifier == NotificationIdentifier.breakComplete ||
                     identifier.hasPrefix(NotificationIdentifier.eyeStrainPrefix) ||
-                    identifier.hasPrefix(NotificationIdentifier.eyeStrainFollowUpPrefix) {
+                    identifier.hasPrefix(NotificationIdentifier.eyeStrainFollowUpPrefix) ||
+                    identifier.hasPrefix(NotificationIdentifier.freshAirPrefix) {
                     return identifier
                 }
                 return nil
@@ -256,12 +276,14 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
         try? await center.add(request)
     }
 
-    func sendCombinedBreakNotification(includeEyeStrain: Bool) async {
+    func sendCombinedBreakNotification(includeEyeStrain: Bool, includeFreshAir: Bool = false) async {
         let content = UNMutableNotificationContent()
         content.title = "Break Time — Hydrate!"
-        content.body = includeEyeStrain
-            ? "Look away for 20 seconds, stretch, and drink some water."
-            : "Rest your eyes, stretch, and drink some water."
+        var parts: [String] = []
+        if includeEyeStrain { parts.append("Look away for 20 seconds.") }
+        if includeFreshAir { parts.append("Get some fresh air.") }
+        parts.append("Stretch and drink some water.")
+        content.body = parts.joined(separator: " ")
         content.sound = .default
         content.categoryIdentifier = "HYDRATION_REMINDER"
 
