@@ -37,6 +37,8 @@ final class PomodoroService {
     @ObservationIgnored @AppStorage("allPaused") var allPaused: Bool = false
     @ObservationIgnored @AppStorage("eyeStrainInterval") var eyeStrainInterval: Int = 20
     @ObservationIgnored @AppStorage("eyeStrainSuppressBeforeBreak") var eyeStrainSuppressBeforeBreak: Int = 5
+    @ObservationIgnored @AppStorage("freshAirInterval") var freshAirInterval: Int = 60
+    @ObservationIgnored @AppStorage("freshAirSuppressBeforeBreak") var freshAirSuppressBeforeBreak: Int = 5
 
     // MARK: - Crash Recovery Persistence (CROSS-05)
     @ObservationIgnored @AppStorage("savedEndTime") private var savedEndTimeInterval: Double = 0
@@ -69,6 +71,10 @@ final class PomodoroService {
     // MARK: - Eye-Strain Sub-Timer (EYE-01, EYE-02)
     private var eyeStrainTimer: Timer?
     private var eyeStrainSuppressed: Bool = false
+
+    // MARK: - Fresh Air Sub-Timer
+    private var freshAirTimer: Timer?
+    private var freshAirSuppressed: Bool = false
 
     // MARK: - Computed Properties
 
@@ -130,6 +136,7 @@ final class PomodoroService {
             beginAppNapPrevention()
             if savedState == .working {
                 startEyeStrainTimer()
+                startFreshAirTimer()
             }
             startDisplayTimer()
         }
@@ -145,6 +152,7 @@ final class PomodoroService {
         endDate = Date().addingTimeInterval(TimeInterval(totalSeconds))
         beginAppNapPrevention()
         startEyeStrainTimer()
+        startFreshAirTimer()
         persistState()
         startDisplayTimer()
     }
@@ -157,12 +165,14 @@ final class PomodoroService {
         secondsRemaining = remaining
         self.endDate = nil
         stopEyeStrainTimer()
+        stopFreshAirTimer()
         persistState()
     }
 
     func resume() {
         endDate = Date().addingTimeInterval(TimeInterval(secondsRemaining))
         startEyeStrainTimer()
+        startFreshAirTimer()
         persistState()
         startDisplayTimer()
     }
@@ -174,6 +184,7 @@ final class PomodoroService {
         autoStartTimer = nil
         pendingAutoStartState = nil
         stopEyeStrainTimer()
+        stopFreshAirTimer()
         state = .idle
         secondsRemaining = 0
         totalSeconds = 0
@@ -199,6 +210,7 @@ final class PomodoroService {
             break
         }
         stopEyeStrainTimer()
+        stopFreshAirTimer()
         endAppNapPrevention()
     }
 
@@ -271,14 +283,15 @@ final class PomodoroService {
             Task {
                 if hydrationDue {
                     // Send combined notification instead of separate work-complete + hydration
-                    await notificationService?.sendCombinedBreakNotification(includeEyeStrain: eyeStrainSuppressed)
+                    await notificationService?.sendCombinedBreakNotification(includeEyeStrain: eyeStrainSuppressed, includeFreshAir: freshAirSuppressed)
                     // Reset hydration reminder since we just notified
                     hydrationService?.startReminders()
                 } else {
-                    await notificationService?.sendWorkCompleteNotification(includeEyeStrain: eyeStrainSuppressed)
+                    await notificationService?.sendWorkCompleteNotification(includeEyeStrain: eyeStrainSuppressed, includeFreshAir: freshAirSuppressed)
                 }
             }
             stopEyeStrainTimer()
+            stopFreshAirTimer()
 
             let nextBreakState: PomodoroState =
                 (sessionsCompleted % sessionsBeforeLongBreak == 0)
@@ -345,6 +358,7 @@ final class PomodoroService {
             endDate = Date().addingTimeInterval(TimeInterval(totalSeconds))
             beginAppNapPrevention()
             startEyeStrainTimer()
+            startFreshAirTimer()
             persistState()
             startDisplayTimer()
 
@@ -397,6 +411,33 @@ final class PomodoroService {
         }
         // Fire standalone eye-strain notification (EYE-01)
         await notificationService?.sendEyeStrainNotification()
+    }
+
+    // MARK: - Fresh Air Sub-Timer
+
+    private func startFreshAirTimer() {
+        freshAirTimer?.invalidate()
+        freshAirSuppressed = false
+        freshAirTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(freshAirInterval * 60), repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                await self?.handleFreshAirTick()
+            }
+        }
+    }
+
+    private func stopFreshAirTimer() {
+        freshAirTimer?.invalidate()
+        freshAirTimer = nil
+    }
+
+    private func handleFreshAirTick() async {
+        guard state == .working, let endDate else { return }
+        let timeUntilBreak = endDate.timeIntervalSinceNow
+        if timeUntilBreak <= TimeInterval(freshAirSuppressBeforeBreak * 60) {
+            freshAirSuppressed = true
+            return
+        }
+        await notificationService?.sendFreshAirNotification()
     }
 
     // MARK: - App Nap Prevention (CROSS-04)

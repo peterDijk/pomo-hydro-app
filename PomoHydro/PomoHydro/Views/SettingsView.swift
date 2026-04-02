@@ -74,6 +74,8 @@ private struct PomodoroSettingsTab: View {
     @AppStorage("autoStartWork") private var autoStartWork: Bool = true
     @AppStorage("eyeStrainInterval") private var eyeStrainInterval: Int = 20
     @AppStorage("eyeStrainSuppressBeforeBreak") private var eyeStrainSuppressBeforeBreak: Int = 5
+    @AppStorage("freshAirInterval") private var freshAirInterval: Int = 60
+    @AppStorage("freshAirSuppressBeforeBreak") private var freshAirSuppressBeforeBreak: Int = 5
     @Environment(PomodoroService.self) private var pomodoroService
 
     var body: some View {
@@ -99,6 +101,8 @@ private struct PomodoroSettingsTab: View {
             sliderRow(label: "Sessions Before Long Break", value: $sessionsBeforeLongBreak, range: 2...8, format: "%d")
             sliderRow(label: "Eye-Strain Reminder", value: $eyeStrainInterval, range: 1...30, format: "%d min")
             sliderRow(label: "Skip Eye-Strain Reminder Near Break", value: $eyeStrainSuppressBeforeBreak, range: 0...10, format: "<= %d min")
+            sliderRow(label: "Fresh Air Reminder", value: $freshAirInterval, range: 1...120, format: "%d min")
+            sliderRow(label: "Skip Fresh Air Reminder Near Break", value: $freshAirSuppressBeforeBreak, range: 0...10, format: "<= %d min")
 
             Divider()
                 .padding(.vertical, 4)
@@ -117,6 +121,8 @@ private struct PomodoroSettingsTab: View {
                     sessionsBeforeLongBreak = 4
                     eyeStrainInterval = 20
                     eyeStrainSuppressBeforeBreak = 5
+                    freshAirInterval = 60
+                    freshAirSuppressBeforeBreak = 5
                     autoStartBreak = true
                     autoStartWork = true
                 }
