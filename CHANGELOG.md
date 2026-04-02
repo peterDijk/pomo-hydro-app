@@ -2,6 +2,15 @@
 
 All notable changes to this project since `v1.0` are documented in this file.
 
+## [v1.1.0] - 2026-04-02
+
+### Added
+
+- Fresh Air Reminder: periodic notification during work sessions encouraging you to step outside for fresh air.
+- New Pomodoro setting: `Fresh Air Reminder` interval, configurable from 1 to 120 minutes (default: 60 min).
+- New Pomodoro setting: `Skip Fresh Air Reminder Near Break`, with a configurable merge window from 0 to 10 minutes (default: 5 min).
+- Fresh Air reminders are suppressed near breaks and folded into break/combined notifications, matching the existing eye-strain behaviour.
+
 ## [v1.0.1] - 2026-03-31
 
 ### Added
